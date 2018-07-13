@@ -6,6 +6,9 @@ import model_definition as model
 from model_definition import initial_parameters_mem, initial_parameters_mem, initial_parameters_fg
 import MCgenerator
 
+RoI_R = 100
+RoI_vs = (0,100)
+
 argvs = sys.argv
 argc = len(argvs)
 ####    ####
@@ -43,6 +46,7 @@ print("mcsteps:\n",mcsteps)
 
 # import unbiased observed data
 mem = pd.read_csv(mem_fname)
+mem = mem[(mem.R<RoI_R).values * (RoI_vs[0]<mem.R).values * (mem.R<RoI_vs[1]).values]
 if "kind" in mem.columns:
     mem = mem[mem.kind=="mem"]
 print("read mocks...completed.")
