@@ -1,0 +1,18 @@
+member stars filename: mock_mem_noMCMC1milion_v001.csv
+foreground stars filename: params_chain_noMCMC1milion_v001.csv
+putput filename: mclog_noMCMC1milion_v001.csv
+--no-confirmation option called. do without confirmation.
+parameter_estimation start.
+mcsteps:
+ [5000, 5000, 5000, 20000]
+read mocks...completed.
+impose biases...completed.
+likelihood has been defined.
+initialization of MCgenerator start.
+function loaded.
+logpdf_initialization completed.
+Data chains are initialized.
+MCparameters are initialized.
+MC generator setup.
+MCgeneration start.
+options: {'push_time': 5}
