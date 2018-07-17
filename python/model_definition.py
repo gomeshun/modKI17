@@ -5,7 +5,7 @@
 import numpy as np
 import pandas as pd
 from scipy.stats import norm as gauss
-from scipy.integrate import dblquad 
+from scipy.integrate import dblquad, quad
 import MCgenerator
 
 # definitions of true parameters
@@ -38,9 +38,9 @@ def dist_func_mem(v,R,r_e,v_mem,a,b):
         where
         norm = \int\int_{RoI}{dv}{dR} (2\pi R) * (Plummer model) * (Gaussian for v)
     '''
-    prob_R = lambda R: 2*np.pi*R * np.power(1+(R/r_e)*(R/r_e),-2) # Plummer model, NOTE: no r_e^-2 but it is not required because the normalization factor also contain r_e^-2
+    prob_R = lambda R: 2*np.pi*R / (1+(R/r_e)**2)**2 # Plummer model, NOTE: no r_e^-2 but it is not required because the normalization factor also contain r_e^-2
     prob_v_R = lambda v,R: gauss.pdf(v,loc=v_mem,scale=(a+b*(R/r_e)))
-    norm = quad(
+    norm,err_norm = quad(
         func = lambda R: (gauss.cdf(RoI_v_hi,loc=v_mem,scale=(a+b*(R/r_e)))-gauss.cdf(RoI_v_lo,loc=v_mem,scale=(a+b*(R/r_e))))*prob_R(R),
         a = 0, b = RoI_R
     )
@@ -70,7 +70,7 @@ def dist_func_fg(v,R,v_fg,dv_fg):
     '''
     prob_R = lambda R: 2*np.pi*R # constant model
     prob_v_R = lambda v,R: gauss.pdf(v,loc=v_fg,scale=dv_fg)
-    norm = quad(
+    norm,err_norm = quad(
         func = lambda R: (gauss.cdf(RoI_v_hi,loc=v_fg,scale=dv_fg)-gauss.cdf(RoI_v_lo,loc=v_fg,scale=dv_fg))*prob_R(R),
         a = 0, b = RoI_R
     )
