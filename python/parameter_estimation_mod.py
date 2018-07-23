@@ -81,7 +81,7 @@ class KI17_loglikelihood_mod:
                 'b': (model.RoI_v_hi-v_fg)/dv_fg,
                 'loc':v_fg, 'scale':dv_fg}
             sigma_mem_normed = (1/(1+(self.Rs/r_e)**2)**2) / (1/((1+(1)**2)**2))
-            G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+            G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
             probs_R = 1/(1+sigma_fg_normed/(sigma_mem_normed*G_mem_normed))
             loglikelis = np.log(probs_R*truncgauss.pdf(self.vs,**args_mem) + (1-probs_R)*truncgauss.pdf(self.vs,**args_fg))
             return np.sum(loglikelis)
