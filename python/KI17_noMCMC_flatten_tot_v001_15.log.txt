@@ -1,0 +1,199 @@
+member stars filename: mock_tot_flatten_noMCMC_v001_15.csv
+foreground stars filename: mock_tot_flatten_noMCMC_v001_15.csv
+putput filename: params_chain_noMCMC_flatten_tot_v001_15.csv
+log filename: mclog_modKI17_noMCMC_flatten_tot_v001_15.csv
+--no-confirmation option called. do without confirmation.
+parameter_estimation start.
+mcsteps:
+ [5000, 5000, 5000, 20000]
+read mocks...completed.
+impose biases...completed.
+likelihood has been defined.
+initialization of MCgenerator start.
+function loaded.
+logpdf_initialization completed.
+Data chains are initialized.
+MCparameters are initialized.
+MC generator setup.
+MCgeneration start.
+options: {'push_time': 5}
+2.020% completed... acceptance rate: 58.42%
+4.380% completed... acceptance rate: 64.38%
+6.760% completed... acceptance rate: 66.27%
+8.740% completed... acceptance rate: 68.19%
+10.980% completed... acceptance rate: 69.95%
+13.180% completed... acceptance rate: 69.95%
+15.280% completed... acceptance rate: 71.34%
+17.480% completed... acceptance rate: 71.17%
+20.140% completed... acceptance rate: 71.00%
+22.720% completed... acceptance rate: 70.16%
+26.500% completed... acceptance rate: 71.09%
+29.600% completed... acceptance rate: 71.28%
+33.060% completed... acceptance rate: 71.51%
+36.440% completed... acceptance rate: 71.46%
+39.620% completed... acceptance rate: 71.68%
+42.880% completed... acceptance rate: 71.64%
+46.360% completed... acceptance rate: 71.92%
+50.680% completed... acceptance rate: 72.14%
+55.220% completed... acceptance rate: 72.58%
+58.940% completed... acceptance rate: 72.55%
+62.680% completed... acceptance rate: 72.50%
+66.740% completed... acceptance rate: 72.28%
+71.660% completed... acceptance rate: 72.43%
+76.800% completed... acceptance rate: 72.37%
+81.980% completed... acceptance rate: 72.55%
+86.400% completed... acceptance rate: 72.80%
+91.200% completed... acceptance rate: 72.81%
+95.540% completed... acceptance rate: 72.89%
+MCgeneration end.
+MCresults are stored.
+MCinfo are logged.
+     a    b     s  v_mem  iter_num
+0  0.2  0.2  0.01    0.2      5000
+0th iteration: update dargs_logpdf. 
+before:
+v_mem    0.20
+a        0.20
+b        0.20
+s        0.01
+dtype: float64
+after:
+v_mem    1.102649
+a        1.262549
+b        1.897089
+s        0.030243
+dtype: float64
+MCgeneration start.
+options: {}
+9.420% completed... acceptance rate: 21.23%
+18.120% completed... acceptance rate: 19.65%
+26.880% completed... acceptance rate: 18.68%
+34.740% completed... acceptance rate: 18.77%
+42.000% completed... acceptance rate: 19.00%
+50.220% completed... acceptance rate: 19.59%
+58.380% completed... acceptance rate: 19.73%
+66.540% completed... acceptance rate: 19.96%
+74.800% completed... acceptance rate: 20.29%
+82.780% completed... acceptance rate: 20.15%
+91.240% completed... acceptance rate: 19.68%
+MCgeneration end.
+MCresults are stored.
+MCinfo are logged.
+          a         b         s     v_mem  iter_num
+0  0.200000  0.200000  0.010000  0.200000      5000
+1  1.262549  1.897089  0.030243  1.102649      5000
+1th iteration: update dargs_logpdf. 
+before:
+v_mem    1.102649
+a        1.262549
+b        1.897089
+s        0.030243
+dtype: float64
+after:
+v_mem    1.150466
+a        1.767021
+b        2.388686
+s        0.015894
+dtype: float64
+MCgeneration start.
+options: {}
+8.300% completed... acceptance rate: 20.48%
+16.880% completed... acceptance rate: 21.09%
+25.080% completed... acceptance rate: 22.73%
+34.220% completed... acceptance rate: 22.03%
+43.800% completed... acceptance rate: 21.92%
+52.100% completed... acceptance rate: 21.88%
+60.120% completed... acceptance rate: 21.49%
+69.200% completed... acceptance rate: 21.27%
+77.320% completed... acceptance rate: 21.37%
+86.520% completed... acceptance rate: 21.15%
+95.260% completed... acceptance rate: 21.16%
+MCgeneration end.
+MCresults are stored.
+MCinfo are logged.
+          a         b         s     v_mem  iter_num
+0  0.200000  0.200000  0.010000  0.200000      5000
+1  1.262549  1.897089  0.030243  1.102649      5000
+2  1.767021  2.388686  0.015894  1.150466      5000
+2th iteration: update dargs_logpdf. 
+before:
+v_mem    1.150466
+a        1.767021
+b        2.388686
+s        0.015894
+dtype: float64
+after:
+v_mem    1.166315
+a        1.641999
+b        2.187849
+s        0.015247
+dtype: float64
+MCgeneration start.
+options: {}
+2.360% completed... acceptance rate: 25.00%
+4.385% completed... acceptance rate: 23.49%
+6.285% completed... acceptance rate: 23.79%
+8.680% completed... acceptance rate: 23.33%
+10.990% completed... acceptance rate: 23.29%
+13.300% completed... acceptance rate: 23.23%
+15.695% completed... acceptance rate: 22.40%
+17.925% completed... acceptance rate: 22.43%
+20.105% completed... acceptance rate: 22.56%
+22.445% completed... acceptance rate: 22.45%
+24.635% completed... acceptance rate: 22.18%
+26.920% completed... acceptance rate: 22.42%
+29.070% completed... acceptance rate: 22.43%
+31.585% completed... acceptance rate: 22.43%
+33.630% completed... acceptance rate: 22.47%
+35.740% completed... acceptance rate: 22.47%
+37.950% completed... acceptance rate: 22.56%
+40.310% completed... acceptance rate: 22.60%
+42.555% completed... acceptance rate: 22.55%
+44.840% completed... acceptance rate: 22.37%
+47.130% completed... acceptance rate: 22.42%
+49.080% completed... acceptance rate: 22.44%
+51.370% completed... acceptance rate: 22.57%
+53.660% completed... acceptance rate: 22.46%
+55.770% completed... acceptance rate: 22.42%
+57.805% completed... acceptance rate: 22.37%
+59.750% completed... acceptance rate: 22.46%
+61.775% completed... acceptance rate: 22.40%
+63.945% completed... acceptance rate: 22.49%
+66.035% completed... acceptance rate: 22.59%
+68.140% completed... acceptance rate: 22.51%
+70.175% completed... acceptance rate: 22.45%
+72.260% completed... acceptance rate: 22.52%
+74.505% completed... acceptance rate: 22.54%
+76.630% completed... acceptance rate: 22.53%
+78.630% completed... acceptance rate: 22.59%
+80.470% completed... acceptance rate: 22.65%
+82.605% completed... acceptance rate: 22.66%
+84.790% completed... acceptance rate: 22.66%
+87.075% completed... acceptance rate: 22.74%
+89.100% completed... acceptance rate: 22.64%
+91.225% completed... acceptance rate: 22.67%
+93.535% completed... acceptance rate: 22.70%
+95.630% completed... acceptance rate: 22.69%
+97.550% completed... acceptance rate: 22.75%
+99.565% completed... acceptance rate: 22.82%
+MCgeneration end.
+MCresults are stored.
+MCinfo are logged.
+          a         b         s     v_mem  iter_num
+0  0.200000  0.200000  0.010000  0.200000      5000
+1  1.262549  1.897089  0.030243  1.102649      5000
+2  1.767021  2.388686  0.015894  1.150466      5000
+3  1.641999  2.187849  0.015247  1.166315     20000
+3th iteration: update dargs_logpdf. 
+before:
+v_mem    1.166315
+a        1.641999
+b        2.187849
+s        0.015247
+dtype: float64
+after:
+v_mem    1.172228
+a        1.572584
+b        2.112178
+s        0.016276
+dtype: float64
