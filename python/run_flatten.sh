@@ -5,6 +5,7 @@ do
   for j in `seq 0 9`
   do
     i=$((10*n+j))
+    echo "calc start for ${i}th mock."
     fnmem=mock_tot_flatten_noMCMC_${v}_${i}.csv
     fnfg=mock_tot_flatten_noMCMC_${v}_${i}.csv
     pchain=params_chain_modKI17_noMCMC_flatten_tot_${v}_${i}.csv
