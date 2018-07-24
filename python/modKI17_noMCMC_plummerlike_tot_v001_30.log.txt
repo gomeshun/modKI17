@@ -1,0 +1,239 @@
+member stars filename: mock_tot_plummerlike_noMCMC_v001_30.csv
+foreground stars filename: mock_tot_plummerlike_noMCMC_v001_30.csv
+putput filename: params_chain_modKI17_noMCMC_plummerlike_tot_v001_30.csv
+log filename: mclog_modKI17_noMCMC_plummerlike_tot_v001_30.csv
+--no-confirmation option called. do without confirmation.
+parameter_estimation start.
+mcsteps:
+ [5000, 5000, 5000, 20000]
+read mocks...completed.
+impose biases...completed.
+0       65.053959
+1       44.939036
+3       65.274643
+4       26.348678
+5       26.599450
+6       35.701359
+7       48.475105
+8       68.180769
+9       35.036280
+10      40.416276
+13      57.931801
+14      35.178150
+15      47.572745
+16      46.472088
+17      63.312648
+18      59.053705
+20      44.209060
+21      62.732776
+22      35.924580
+23      27.714844
+24      64.461764
+25      46.383623
+26      62.100054
+27      41.343951
+28      53.462929
+29      63.482332
+30      78.257097
+31      55.420801
+32      58.438123
+33      58.130200
+          ...    
+1465    22.748410
+1467    88.173853
+1468    89.599428
+1469    62.615525
+1470    33.440561
+1471    81.612860
+1472    32.883358
+1473    79.456517
+1474    84.511977
+1475    96.088524
+1476     1.096627
+1477    52.115006
+1478    38.275060
+1479    94.086420
+1480    44.277761
+1481    20.072785
+1482    80.968098
+1483    78.726904
+1484    63.556156
+1485    19.316349
+1486    59.087973
+1487    58.610110
+1488    32.721244
+1489    53.261039
+1490    32.870183
+1492    18.695763
+1496     3.043401
+1497    23.707655
+1498    28.479426
+1499    80.272389
+Name: v, Length: 1501, dtype: float64
+0         2.149037
+1         3.452718
+3         3.649571
+4         4.049847
+5         4.616738
+6         5.114047
+7         5.678976
+8         5.708770
+9         6.686429
+10        7.159985
+13        8.136796
+14        8.224428
+15        8.426705
+16        8.779025
+17        8.840253
+18        9.378531
+20       10.023108
+21       10.243474
+22       10.331058
+23       10.524552
+24       10.576307
+25       10.586492
+26       10.597227
+27       10.993444
+28       11.119577
+29       11.225680
+30       11.280739
+31       11.435041
+32       11.439146
+33       11.490976
+           ...    
+1465    181.340874
+1467    181.723859
+1468    182.072436
+1469    182.218151
+1470    182.484372
+1471    182.761511
+1472    182.932467
+1473    183.529942
+1474    184.805634
+1475    185.376377
+1476    185.583749
+1477    186.020518
+1478    186.780832
+1479    186.793562
+1480    187.750870
+1481    189.867049
+1482    189.884030
+1483    190.178579
+1484    191.070278
+1485    191.779849
+1486    192.014983
+1487    192.067213
+1488    192.654378
+1489    192.655437
+1490    193.047884
+1492    193.568781
+1496    196.220216
+1497    198.075338
+1498    198.731498
+1499    198.807010
+Name: R, Length: 1501, dtype: float64
+likelihood has been defined.
+initialization of MCgenerator start.
+function loaded.
+logpdf_initialization completed.
+Data chains are initialized.
+MCparameters are initialized.
+MC generator setup.
+MCgeneration start.
+options: {'push_time': 5}
+26.700% completed... acceptance rate: 78.43%
+53.740% completed... acceptance rate: 78.04%
+80.780% completed... acceptance rate: 78.29%
+MCgeneration end.
+MCresults are stored.
+MCinfo are logged.
+     a    b  sigma_fg_normed  v_mem  iter_num
+0  0.2  0.2             0.01    0.2      5000
+0th iteration: update dargs_logpdf. 
+before:
+a                  0.20
+b                  0.20
+sigma_fg_normed    0.01
+v_mem              0.20
+dtype: float64
+after:
+a                  0.814014
+b                  1.819028
+sigma_fg_normed    0.126706
+v_mem              0.558418
+dtype: float64
+MCgeneration start.
+options: {}
+54.000% completed... acceptance rate: 24.04%
+MCgeneration end.
+MCresults are stored.
+MCinfo are logged.
+          a         b  sigma_fg_normed     v_mem  iter_num
+0  0.200000  0.200000         0.010000  0.200000      5000
+1  0.814014  1.819028         0.126706  0.558418      5000
+1th iteration: update dargs_logpdf. 
+before:
+a                  0.814014
+b                  1.819028
+sigma_fg_normed    0.126706
+v_mem              0.558418
+dtype: float64
+after:
+a                  0.817412
+b                  1.823469
+sigma_fg_normed    0.124245
+v_mem              0.562355
+dtype: float64
+MCgeneration start.
+options: {}
+54.340% completed... acceptance rate: 24.66%
+MCgeneration end.
+MCresults are stored.
+MCinfo are logged.
+          a         b  sigma_fg_normed     v_mem  iter_num
+0  0.200000  0.200000         0.010000  0.200000      5000
+1  0.814014  1.819028         0.126706  0.558418      5000
+2  0.817412  1.823469         0.124245  0.562355      5000
+2th iteration: update dargs_logpdf. 
+before:
+a                  0.817412
+b                  1.823469
+sigma_fg_normed    0.124245
+v_mem              0.562355
+dtype: float64
+after:
+a                  0.862227
+b                  1.840911
+sigma_fg_normed    0.119041
+v_mem              0.560717
+dtype: float64
+MCgeneration start.
+options: {}
+13.565% completed... acceptance rate: 23.30%
+27.740% completed... acceptance rate: 24.44%
+41.350% completed... acceptance rate: 24.82%
+54.935% completed... acceptance rate: 24.65%
+68.500% completed... acceptance rate: 24.77%
+82.070% completed... acceptance rate: 24.69%
+95.640% completed... acceptance rate: 24.88%
+MCgeneration end.
+MCresults are stored.
+MCinfo are logged.
+          a         b  sigma_fg_normed     v_mem  iter_num
+0  0.200000  0.200000         0.010000  0.200000      5000
+1  0.814014  1.819028         0.126706  0.558418      5000
+2  0.817412  1.823469         0.124245  0.562355      5000
+3  0.862227  1.840911         0.119041  0.560717     20000
+3th iteration: update dargs_logpdf. 
+before:
+a                  0.862227
+b                  1.840911
+sigma_fg_normed    0.119041
+v_mem              0.560717
+dtype: float64
+after:
+a                  0.873627
+b                  1.836456
+sigma_fg_normed    0.123378
+v_mem              0.591338
+dtype: float64

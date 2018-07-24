@@ -1,0 +1,239 @@
+member stars filename: mock_tot_plummerlike_noMCMC_v001_5.csv
+foreground stars filename: mock_tot_plummerlike_noMCMC_v001_5.csv
+putput filename: params_chain_modKI17_noMCMC_plummerlike_tot_v001_5.csv
+log filename: mclog_modKI17_noMCMC_plummerlike_tot_v001_5.csv
+--no-confirmation option called. do without confirmation.
+parameter_estimation start.
+mcsteps:
+ [5000, 5000, 5000, 20000]
+read mocks...completed.
+impose biases...completed.
+0       65.053959
+1       50.911322
+2       60.203353
+3       44.939036
+4       54.334397
+5       65.274643
+6       61.596524
+7       48.475105
+8       60.942279
+9       35.036280
+10      38.181084
+11      40.416276
+14      57.931801
+15      35.178150
+16      47.572745
+17      46.472088
+18      55.107697
+19      42.390216
+21      44.209060
+22      42.722152
+24      62.732776
+25      35.924580
+26      27.714844
+27      33.749829
+28      62.100054
+29      41.343951
+30      53.462929
+31      63.482332
+32      55.420801
+33      58.438123
+          ...    
+1462    45.457561
+1464    38.105647
+1465    48.832880
+1466    37.435768
+1467    87.746354
+1470    86.540086
+1472    89.654658
+1473    91.231419
+1474    79.456517
+1475    71.782037
+1476    81.419978
+1477    70.559179
+1478    30.833881
+1479    89.935936
+1480    61.591763
+1482    20.072785
+1485    16.378306
+1486     2.151517
+1487    40.580766
+1489    55.870993
+1490     5.775207
+1491    52.080555
+1492    62.436475
+1493    55.267125
+1494    28.956973
+1495    88.415677
+1496     7.489309
+1497    16.391089
+1498     0.038979
+1500     1.816288
+Name: v, Length: 1501, dtype: float64
+0         2.149037
+1         2.644600
+2         2.695591
+3         3.452718
+4         3.568034
+5         3.649571
+6         4.230460
+7         5.678976
+8         6.322058
+9         6.686429
+10        7.093997
+11        7.159985
+14        8.136796
+15        8.224428
+16        8.426705
+17        8.779025
+18        8.892489
+19        9.123137
+21       10.023108
+22       10.166677
+24       10.243474
+25       10.331058
+26       10.524552
+27       10.548198
+28       10.597227
+29       10.993444
+30       11.119577
+31       11.225680
+32       11.435041
+33       11.439146
+           ...    
+1462    180.056981
+1464    180.254745
+1465    180.444703
+1466    180.567853
+1467    180.583894
+1470    181.933937
+1472    182.227105
+1473    182.300806
+1474    183.529942
+1475    184.379425
+1476    184.540706
+1477    185.497187
+1478    185.801776
+1479    187.440574
+1480    188.244664
+1482    189.867049
+1485    191.859883
+1486    191.908937
+1487    193.039818
+1489    193.925212
+1490    194.503786
+1491    194.900610
+1492    195.348953
+1493    195.452239
+1494    196.358738
+1495    196.470321
+1496    197.606576
+1497    197.628385
+1498    198.158406
+1500    198.810427
+Name: R, Length: 1501, dtype: float64
+likelihood has been defined.
+initialization of MCgenerator start.
+function loaded.
+logpdf_initialization completed.
+Data chains are initialized.
+MCparameters are initialized.
+MC generator setup.
+MCgeneration start.
+options: {'push_time': 5}
+30.020% completed... acceptance rate: 81.68%
+60.320% completed... acceptance rate: 80.50%
+90.640% completed... acceptance rate: 80.01%
+MCgeneration end.
+MCresults are stored.
+MCinfo are logged.
+     a    b  sigma_fg_normed  v_mem  iter_num
+0  0.2  0.2             0.01    0.2      5000
+0th iteration: update dargs_logpdf. 
+before:
+a                  0.20
+b                  0.20
+sigma_fg_normed    0.01
+v_mem              0.20
+dtype: float64
+after:
+a                  0.962173
+b                  2.299418
+sigma_fg_normed    0.190343
+v_mem              0.550308
+dtype: float64
+MCgeneration start.
+options: {}
+60.460% completed... acceptance rate: 20.87%
+MCgeneration end.
+MCresults are stored.
+MCinfo are logged.
+          a         b  sigma_fg_normed     v_mem  iter_num
+0  0.200000  0.200000         0.010000  0.200000      5000
+1  0.962173  2.299418         0.190343  0.550308      5000
+1th iteration: update dargs_logpdf. 
+before:
+a                  0.962173
+b                  2.299418
+sigma_fg_normed    0.190343
+v_mem              0.550308
+dtype: float64
+after:
+a                  0.796828
+b                  2.067125
+sigma_fg_normed    0.147953
+v_mem              0.585369
+dtype: float64
+MCgeneration start.
+options: {}
+54.240% completed... acceptance rate: 26.66%
+MCgeneration end.
+MCresults are stored.
+MCinfo are logged.
+          a         b  sigma_fg_normed     v_mem  iter_num
+0  0.200000  0.200000         0.010000  0.200000      5000
+1  0.962173  2.299418         0.190343  0.550308      5000
+2  0.796828  2.067125         0.147953  0.585369      5000
+2th iteration: update dargs_logpdf. 
+before:
+a                  0.796828
+b                  2.067125
+sigma_fg_normed    0.147953
+v_mem              0.585369
+dtype: float64
+after:
+a                  0.864033
+b                  2.291337
+sigma_fg_normed    0.164890
+v_mem              0.630595
+dtype: float64
+MCgeneration start.
+options: {}
+13.585% completed... acceptance rate: 20.72%
+27.180% completed... acceptance rate: 21.91%
+40.785% completed... acceptance rate: 21.90%
+54.375% completed... acceptance rate: 22.31%
+67.930% completed... acceptance rate: 22.43%
+81.545% completed... acceptance rate: 22.28%
+95.165% completed... acceptance rate: 22.50%
+MCgeneration end.
+MCresults are stored.
+MCinfo are logged.
+          a         b  sigma_fg_normed     v_mem  iter_num
+0  0.200000  0.200000         0.010000  0.200000      5000
+1  0.962173  2.299418         0.190343  0.550308      5000
+2  0.796828  2.067125         0.147953  0.585369      5000
+3  0.864033  2.291337         0.164890  0.630595     20000
+3th iteration: update dargs_logpdf. 
+before:
+a                  0.864033
+b                  2.291337
+sigma_fg_normed    0.164890
+v_mem              0.630595
+dtype: float64
+after:
+a                  0.868669
+b                  2.253282
+sigma_fg_normed    0.148362
+v_mem              0.613823
+dtype: float64
