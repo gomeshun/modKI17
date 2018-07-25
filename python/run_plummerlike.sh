@@ -1,8 +1,8 @@
-v=v001
+v=v002
 
 for n in `seq 0 4`
 do
-  for j in `seq 0 9`
+  for j in `seq 0 4`
   do
     i=$((10*n+j))
     echo "calc start for ${i}th mock."

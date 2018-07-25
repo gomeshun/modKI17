@@ -1,5 +1,9 @@
 v=v001
-for i in `seq 10`
+for n in `seq 0 4`
 do
- echo hoge${i}${v}
+  for i in `seq 0 9`
+  do
+  j=$((10*n+i))
+    echo hoge${j}
+  done
 done
