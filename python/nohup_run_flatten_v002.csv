@@ -1,0 +1,185 @@
+calc start for 0th mock.
+calc start for 1th mock.
+calc start for 2th mock.
+calc start for 3th mock.
+calc start for 4th mock.
+calc start for 10th mock.
+calc start for 11th mock.
+calc start for 12th mock.
+calc start for 13th mock.
+calc start for 14th mock.
+calc start for 20th mock.
+calc start for 21th mock.
+calc start for 22th mock.
+calc start for 23th mock.
+calc start for 24th mock.
+calc start for 30th mock.
+calc start for 31th mock.
+calc start for 32th mock.
+calc start for 33th mock.
+calc start for 34th mock.
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 41, in <module>
+    mem = pd.read_csv(mem_fname)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 709, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 449, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 818, in __init__
+    self._make_engine(self.engine)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1049, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1695, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 402, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 718, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: File b'mock_tot_flatten_noMCMC_v002_31.csv' does not exist
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 41, in <module>
+    mem = pd.read_csv(mem_fname)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 709, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 449, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 818, in __init__
+    self._make_engine(self.engine)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1049, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1695, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 402, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 718, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: File b'mock_tot_flatten_noMCMC_v002_30.csv' does not exist
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 41, in <module>
+    mem = pd.read_csv(mem_fname)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 709, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 449, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 818, in __init__
+    self._make_engine(self.engine)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1049, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1695, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 402, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 718, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: File b'mock_tot_flatten_noMCMC_v002_34.csv' does not exist
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 41, in <module>
+    mem = pd.read_csv(mem_fname)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 709, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 449, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 818, in __init__
+    self._make_engine(self.engine)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1049, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1695, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 402, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 718, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: File b'mock_tot_flatten_noMCMC_v002_32.csv' does not exist
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 41, in <module>
+    mem = pd.read_csv(mem_fname)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 709, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 449, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 818, in __init__
+    self._make_engine(self.engine)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1049, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1695, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 402, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 718, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: File b'mock_tot_flatten_noMCMC_v002_33.csv' does not exist
+calc start for 40th mock.
+calc start for 41th mock.
+calc start for 42th mock.
+calc start for 43th mock.
+calc start for 44th mock.
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 41, in <module>
+    mem = pd.read_csv(mem_fname)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 709, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 449, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 818, in __init__
+    self._make_engine(self.engine)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1049, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1695, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 402, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 718, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: File b'mock_tot_flatten_noMCMC_v002_42.csv' does not exist
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 41, in <module>
+    mem = pd.read_csv(mem_fname)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 709, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 449, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 818, in __init__
+    self._make_engine(self.engine)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1049, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1695, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 402, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 718, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: File b'mock_tot_flatten_noMCMC_v002_43.csv' does not exist
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 41, in <module>
+    mem = pd.read_csv(mem_fname)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 709, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 449, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 818, in __init__
+    self._make_engine(self.engine)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1049, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1695, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 402, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 718, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: File b'mock_tot_flatten_noMCMC_v002_41.csv' does not exist
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 41, in <module>
+    mem = pd.read_csv(mem_fname)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 709, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 449, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 818, in __init__
+    self._make_engine(self.engine)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1049, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1695, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 402, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 718, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: File b'mock_tot_flatten_noMCMC_v002_44.csv' does not exist
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 41, in <module>
+    mem = pd.read_csv(mem_fname)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 709, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 449, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 818, in __init__
+    self._make_engine(self.engine)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1049, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/gomeshun/.pyenv/versions/3.6.5/lib/python3.6/site-packages/pandas/io/parsers.py", line 1695, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 402, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 718, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: File b'mock_tot_flatten_noMCMC_v002_40.csv' does not exist
