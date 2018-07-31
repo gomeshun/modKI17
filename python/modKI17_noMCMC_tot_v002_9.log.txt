@@ -1,0 +1,285 @@
+member stars filename: mock_tot_noMCMC_v002_9.csv
+foreground stars filename: mock_tot_noMCMC_v002_9.csv
+putput filename: params_chain_modKI17_noMCMC_tot_v002_9.csv
+log filename: mclog_modKI17_noMCMC_tot_v002_9.csv
+--no-confirmation option called. do without confirmation.
+parameter_estimation start.
+mcsteps:
+ [5000, 5000, 5000, 20000]
+read mocks...completed.
+impose biases...completed.
+0       31.967160
+1       45.343379
+2       53.359453
+3       71.931982
+4       29.132154
+5       28.595521
+6       52.005097
+7       44.101100
+8       66.644048
+9       37.528625
+10      16.492993
+11      51.588116
+12      35.998562
+13      73.283449
+14      47.477925
+15      49.025338
+16      41.376479
+17      56.844333
+18      54.639126
+19      43.725213
+20      67.297809
+21      62.243009
+22      41.169144
+23      76.958186
+24      37.387295
+25      68.521955
+26      91.620920
+27      59.978605
+28      42.933848
+29      39.052639
+          ...    
+9970    27.537643
+9971    37.686911
+9972    19.584129
+9973    90.800530
+9974    26.645233
+9975    16.942324
+9976    27.056176
+9977    27.466753
+9978    69.059419
+9979    58.942267
+9980    95.269264
+9981    67.452878
+9982    30.567138
+9983    39.244567
+9984    72.652845
+9985    48.698659
+9986    67.160352
+9987     6.840709
+9988    62.272095
+9989    72.333323
+9990    99.946248
+9991    95.426142
+9992    51.049069
+9993    96.716000
+9994    44.562382
+9995    99.704470
+9996     4.976772
+9997    94.345511
+9998    28.328452
+9999    83.090420
+Name: v, Length: 20000, dtype: float64
+0        43.099283
+1        34.617611
+2        81.043273
+3       186.461982
+4       129.975540
+5       135.480869
+6        94.652650
+7        59.602959
+8       100.745185
+9       146.212613
+10      115.193014
+11       61.320742
+12       68.420452
+13      109.534136
+14      142.903805
+15       14.513482
+16       23.334698
+17       42.463511
+18       67.801055
+19       23.724584
+20      134.793910
+21      197.340072
+22       71.584498
+23       64.312482
+24      107.866686
+25       81.094370
+26      181.511619
+27       40.119459
+28       82.244187
+29       24.510370
+           ...    
+9970    175.992961
+9971     53.182699
+9972     70.796557
+9973     71.026146
+9974     94.056117
+9975     91.864774
+9976    157.471567
+9977     62.894379
+9978     64.132740
+9979    177.761348
+9980    137.164466
+9981    182.676982
+9982     49.907864
+9983    127.908423
+9984     38.441668
+9985     67.384595
+9986     42.122706
+9987    126.150096
+9988    165.540176
+9989    104.523432
+9990     76.092279
+9991    168.826093
+9992    121.802715
+9993    193.839961
+9994    105.797981
+9995     81.976372
+9996    187.775540
+9997    175.897694
+9998    138.804712
+9999    137.825312
+Name: R, Length: 20000, dtype: float64
+likelihood has been defined.
+initialization of MCgenerator start.
+function loaded.
+logpdf_initialization completed.
+Data chains are initialized.
+MCparameters are initialized.
+MC generator setup.
+MCgeneration start.
+options: {'push_time': 5}
+6.500% completed... acceptance rate: 54.77%
+13.080% completed... acceptance rate: 52.29%
+19.600% completed... acceptance rate: 52.86%
+25.980% completed... acceptance rate: 51.66%
+32.820% completed... acceptance rate: 51.19%
+39.600% completed... acceptance rate: 51.62%
+46.460% completed... acceptance rate: 51.53%
+52.840% completed... acceptance rate: 51.70%
+59.500% completed... acceptance rate: 52.67%
+65.500% completed... acceptance rate: 52.37%
+72.000% completed... acceptance rate: 52.33%
+78.100% completed... acceptance rate: 52.47%
+84.100% completed... acceptance rate: 52.51%
+90.600% completed... acceptance rate: 52.27%
+97.380% completed... acceptance rate: 52.23%
+MCgeneration end.
+MCresults are stored.
+MCinfo are logged.
+     a    b  sigma_fg_normed  v_mem  iter_num
+0  0.2  0.2             0.01    0.2      5000
+0th iteration: update dargs_logpdf. 
+before:
+v_mem              0.20
+a                  0.20
+b                  0.20
+sigma_fg_normed    0.01
+dtype: float64
+after:
+v_mem              0.231676
+a                  0.357844
+b                  0.713533
+sigma_fg_normed    0.060779
+dtype: float64
+MCgeneration start.
+options: {}
+13.280% completed... acceptance rate: 24.25%
+27.280% completed... acceptance rate: 23.09%
+40.580% completed... acceptance rate: 22.38%
+53.680% completed... acceptance rate: 21.65%
+67.160% completed... acceptance rate: 21.80%
+80.340% completed... acceptance rate: 21.43%
+93.720% completed... acceptance rate: 21.75%
+MCgeneration end.
+MCresults are stored.
+MCinfo are logged.
+          a         b  sigma_fg_normed     v_mem  iter_num
+0  0.200000  0.200000         0.010000  0.200000      5000
+1  0.357844  0.713533         0.060779  0.231676      5000
+1th iteration: update dargs_logpdf. 
+before:
+v_mem              0.231676
+a                  0.357844
+b                  0.713533
+sigma_fg_normed    0.060779
+dtype: float64
+after:
+v_mem              0.244122
+a                  0.365067
+b                  0.780490
+sigma_fg_normed    0.060622
+dtype: float64
+MCgeneration start.
+options: {}
+13.520% completed... acceptance rate: 18.79%
+26.960% completed... acceptance rate: 19.29%
+39.980% completed... acceptance rate: 19.46%
+52.860% completed... acceptance rate: 20.13%
+65.800% completed... acceptance rate: 19.94%
+79.160% completed... acceptance rate: 19.96%
+92.500% completed... acceptance rate: 19.94%
+MCgeneration end.
+MCresults are stored.
+MCinfo are logged.
+          a         b  sigma_fg_normed     v_mem  iter_num
+0  0.200000  0.200000         0.010000  0.200000      5000
+1  0.357844  0.713533         0.060779  0.231676      5000
+2  0.365067  0.780490         0.060622  0.244122      5000
+2th iteration: update dargs_logpdf. 
+before:
+v_mem              0.244122
+a                  0.365067
+b                  0.780490
+sigma_fg_normed    0.060622
+dtype: float64
+after:
+v_mem              0.243269
+a                  0.356816
+b                  0.720602
+sigma_fg_normed    0.054540
+dtype: float64
+MCgeneration start.
+options: {}
+3.405% completed... acceptance rate: 20.70%
+6.870% completed... acceptance rate: 21.25%
+10.270% completed... acceptance rate: 21.91%
+13.675% completed... acceptance rate: 22.19%
+16.985% completed... acceptance rate: 21.99%
+20.415% completed... acceptance rate: 21.97%
+23.955% completed... acceptance rate: 22.17%
+27.295% completed... acceptance rate: 22.48%
+30.610% completed... acceptance rate: 22.23%
+33.915% completed... acceptance rate: 22.34%
+37.305% completed... acceptance rate: 22.53%
+40.760% completed... acceptance rate: 22.47%
+44.115% completed... acceptance rate: 22.57%
+47.405% completed... acceptance rate: 22.46%
+50.850% completed... acceptance rate: 22.38%
+54.135% completed... acceptance rate: 22.36%
+57.410% completed... acceptance rate: 22.42%
+60.695% completed... acceptance rate: 22.38%
+63.995% completed... acceptance rate: 22.43%
+67.500% completed... acceptance rate: 22.47%
+70.850% completed... acceptance rate: 22.54%
+74.315% completed... acceptance rate: 22.52%
+77.535% completed... acceptance rate: 22.52%
+80.865% completed... acceptance rate: 22.50%
+84.270% completed... acceptance rate: 22.41%
+87.545% completed... acceptance rate: 22.43%
+90.885% completed... acceptance rate: 22.48%
+94.095% completed... acceptance rate: 22.45%
+97.285% completed... acceptance rate: 22.54%
+MCgeneration end.
+MCresults are stored.
+MCinfo are logged.
+          a         b  sigma_fg_normed     v_mem  iter_num
+0  0.200000  0.200000         0.010000  0.200000      5000
+1  0.357844  0.713533         0.060779  0.231676      5000
+2  0.365067  0.780490         0.060622  0.244122      5000
+3  0.356816  0.720602         0.054540  0.243269     20000
+3th iteration: update dargs_logpdf. 
+before:
+v_mem              0.243269
+a                  0.356816
+b                  0.720602
+sigma_fg_normed    0.054540
+dtype: float64
+after:
+v_mem              0.223743
+a                  0.384686
+b                  0.749150
+sigma_fg_normed    0.060087
+dtype: float64

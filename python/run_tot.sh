@@ -1,10 +1,12 @@
-v=v002
+v=v003
+n=4
+kmax=3
 
-for n in `seq 0 4`
+for j in `seq 0 $((n-1))`
 do
-  for j in `seq 0 4`
+  for k in `seq 0 $((kmax-1))`
   do
-    i=$((10*n+j))
+    i=$((n*j+k))
     echo "calc start for ${i}th mock."
     fnmem=mock_tot_noMCMC_${v}_${i}.csv
     fnfg=mock_tot_noMCMC_${v}_${i}.csv
