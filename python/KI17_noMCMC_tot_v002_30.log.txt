@@ -1,0 +1,8 @@
+member stars filename: mock_tot_noMCMC_v002_30.csv
+foreground stars filename: mock_tot_noMCMC_v002_30.csv
+putput filename: params_chain_KI17_noMCMC_tot_v002_30.csv
+log filename: mclog_KI17_noMCMC_tot_v002_30.csv
+--no-confirmation option called. do without confirmation.
+parameter_estimation start.
+mcsteps:
+ [5000, 5000, 5000, 20000]
