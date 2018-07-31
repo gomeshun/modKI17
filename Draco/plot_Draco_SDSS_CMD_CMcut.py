@@ -1,11 +1,13 @@
 import matplotlib
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from sympy.geometry import Point, Polygon
 from matplotlib.widgets import Slider, Button
 from mpl_toolkits.mplot3d import Axes3D
 
-from py_header import mylib02 as my
+#from py_header import mylib02 as my
+from coord import projected_distance,projected_angle
 
 ######## config ########
 IMPORT_SDSS_FILENAME = "Draco_SDSS.csv"
@@ -27,6 +29,10 @@ CMD_CUT_C = np.append(CMD_CUT,np.array([CMD_CUT[0]]),axis=0) #2nd argument must 
 #print(CMD_CUT)
 #print(CMD_CUT_C)
 
+dSph_prop = pd.read_csv("dSph_property.csv",index_col=0)
+draco_prop = dSph_prop.loc["Draco"]
+
+######## def ########
 def set_axpos_coordinates():
     ax_pos.set_xlabel(r'$\xi$[deg]')
     ax_pos.set_ylabel(r'$\eta$[deg]')
@@ -50,6 +56,9 @@ def set_axpos_refference():
 def set_axcmd_refference():
     ax_cmd.plot(CMD_CUT_C.T[0],CMD_CUT_C.T[1])
 
+######## def2 ########
+from cmd_utilities import inpoly
+
 ######## main routin ######## 
 
 
@@ -72,16 +81,18 @@ g = g_obs - g_ext # mag: brighter < fainter, X_ext means the extinction effect, 
 i = i_obs - i_ext
 gmi = g-i
 
-x = ra - my.DRACO_CENTER_RA_DEG 
-y = dec - my.DRACO_CENTER_DEC_DEG
+x = ra - draco_prop.RAdeg#my.DRACO_CENTER_RA_DEG 
+y = dec - draco_prop.DEdeg#my.DRACO_CENTER_DEC_DEG
 xy = np.array([x,y]).T
 
-ind_cut = np.where(my.inpoly(gmi,i,CMD_CUT.T[0],CMD_CUT.T[1]))
-coind_cut = np.where(np.logical_not(my.inpoly(gmi,i,CMD_CUT.T[0],CMD_CUT.T[1])))
+#### impose CMD cut here ####
+ind_cut = np.where(inpoly(gmi,i,CMD_CUT.T[0],CMD_CUT.T[1]))
+coind_cut = np.where(np.logical_not(inpoly(gmi,i,CMD_CUT.T[0],CMD_CUT.T[1])))
 print(ind_cut)
 print(coind_cut)
 gmi,co_gmi = gmi[ind_cut],gmi[coind_cut]
 i,co_i = i[ind_cut],i[coind_cut]
+ra,dec = ra[ind_cut], dec[ind_cut]
 xy = xy[ind_cut]
 x,co_x = x[ind_cut], x[coind_cut]
 y,co_y = y[ind_cut], y[coind_cut]
@@ -89,8 +100,8 @@ y,co_y = y[ind_cut], y[coind_cut]
 #co_y = y[coind_cut]
 
 theta = np.arange(360)
-hlr_ra  = my.DRACO_HALF_LIGHT_RADIUS_DEG*np.cos(np.deg2rad(theta))
-hlr_dec = my.DRACO_HALF_LIGHT_RADIUS_DEG*np.sin(np.deg2rad(theta))
+hlr_ra  = draco_prop.RAdeg*np.cos(np.deg2rad(theta))
+hlr_dec = draco_prop.DEdeg*np.sin(np.deg2rad(theta))
 
 #### plot the data ####
 fig = plt.figure() # "figure": a figure in TeX, "axis": a pabel in a figure in TeX
@@ -117,7 +128,10 @@ edges = np.arange(0.00,2.00+1e-8,2.00/binnum)
 edge_centers = (edges[1:binnum+1]+edges[0:binnum])/2
 #print(edge_centers)
 
-n,bins,patches = ax_num.hist(my.dist2d(np.array([x,y]),np.array([0,0])),bins=edges,histtype='step',normed=False)
+#n,bins,patches = ax_num.hist(my.dist2d(np.array([x,y]),np.array([0,0])),bins=edges,histtype='step',normed=False)
+#DEBUG print("projected_deg:\n",(projected_angle(ra=ra,de=dec,ra_center=draco_prop.RAdeg,de_center=draco_prop.DEdeg,dtype="deg")))
+#DEBUG quit()
+n,bins,patches = ax_num.hist(projected_angle(ra=ra,de=dec,ra_center=draco_prop.RAdeg,de_center=draco_prop.DEdeg,dtype="deg"),bins=edges,histtype='step',normed=False)
 ax_ndensity = fig.add_subplot(2,2,4)
 #print(n)
 #print(bins)
@@ -136,8 +150,10 @@ button = Button(ax_button,'export')
 def slider_update(slider_val):
     #ax_pos.clear()  
     #set_axpos_coordinates()
-    ind_cut = my.dist2d(xy.T,np.array([0,0]))<slider_val
-    ind_res = my.dist2d(xy.T,np.array([0,0]))>=slider_val
+    #ind_cut = projected_angle(xy.T,np.array([0,0]))<slider_val
+    #ind_res = my.dist2d(xy.T,np.array([0,0]))>=slider_val
+    ind_cut = projected_angle(draco_prop.RAdeg,draco_prop.DEdeg,ra,dec,dtype="deg")<slider_val
+    ind_res = projected_angle(draco_prop.RAdeg,draco_prop.DEdeg,ra,dec,dtype="deg")>=slider_val
     x_reshaped = x[ind_cut] #[:] means the refference
     y_reshaped = y[ind_cut]
     pos_copathcol.set_offsets(np.concatenate((np.array([x[ind_res],y[ind_res]]).T,np.array([co_x,co_y]).T)))
@@ -157,7 +173,11 @@ def slider_update(slider_val):
 
     ax_num.clear()
     edges = np.arange(0.00,2.00+1e-8,2.00/50)
-    ax_num.hist(my.dist2d(np.array([x_reshaped,y_reshaped]),np.array([0,0])),bins=edges,histtype='step',normed=False)
+    #ax_num.hist(my.dist2d(np.array([x_reshaped,y_reshaped]),np.array([0,0])),bins=edges,histtype='step',normed=False)
+    ax_num.hist(
+        projected_angle(draco_prop.RAdeg,draco_prop.DEdeg,x_reshaped+draco_prop.RAdeg,y_reshaped+draco_prop.DEdeg,dtype="deg"),
+        bins=edges,histtype='step',normed=False
+    )
     #print(vlos_pathcol)
 
     fig.canvas.draw()
@@ -167,7 +187,8 @@ def slider_update(slider_val):
 
 def button_clicked(event):
     #print(event)
-    ind_cut = my.dist2d(xy.T,np.array([0,0]))<slider.val
+    #ind_cut = my.dist2d(xy.T,np.array([0,0]))<slider.val
+    ind_cut = projected_angle(draco_prop.RAdeg,draco_prop.DEdeg,ra,dec,dtype="deg")<slider.val
     x_reshaped = x[ind_cut] #[:] means the refference
     y_reshaped = y[ind_cut] #note that "slider_update" cannot update the variable x and y inside the function.
     X = np.array([x_reshaped,y_reshaped]).T
@@ -184,11 +205,20 @@ def button_clicked(event):
     print(OUTOF_CIRCLE_SUF+EXPORT_FILENAME,'is exported')
 
     myheader = 'r_cut[deg]. r_cut = '+str(slider.val)
-    np.savetxt(EXPORT_FILENAME2,my.dist2d(X.T,np.array([0,0])),'%.6e',delimiter=",",header=myheader,comments='#')
+    #np.savetxt(EXPORT_FILENAME2,my.dist2d(X.T,np.array([0,0])),'%.6e',delimiter=",",header=myheader,comments='#')
+    np.savetxt(
+        EXPORT_FILENAME2,
+        projected_angle(
+            draco_prop.RAdeg,draco_prop.DEdeg,x_reshaped+draco_prop.draco_prop.RAdeg,y_reshaped+draco_prop.DEdeg,dtype="deg"
+        ),
+        '%.6e',delimiter=",",header=myheader,comments='#'
+    )
+    #projected_angle(draco_prop.RAdeg,draco_prop.DEdeg,ra,dec,dtype="deg")
     print(EXPORT_FILENAME2," is exported")
 
     myheader = 'r_cut[deg]. r_cut = '+str(slider.val)
-    np.savetxt(OUTOF_CIRCLE_SUF+EXPORT_FILENAME2,my.dist2d(X_outof_circle.T,np.array([0,0])),'%.6e',delimiter=",",header=myheader,comments='#')
+    #np.savetxt(OUTOF_CIRCLE_SUF+EXPORT_FILENAME2,my.dist2d(X_outof_circle.T,np.array([0,0])),'%.6e',delimiter=",",header=myheader,comments='#')
+    np.savetxt(OUTOF_CIRCLE_SUF+EXPORT_FILENAME2,projected_angle(draco_prop.RAdeg,draco_prop.DEdeg,x_outof_circle+draco_prop.draco_prop.RAdeg,y_outof_circle+draco_prop.DEdeg,dtype="deg"),'%.6e',delimiter=",",header=myheader,comments='#')
     print(OUTOF_CIRCLE_SUF+EXPORT_FILENAME2," is exported")
 
 def onclick(event):

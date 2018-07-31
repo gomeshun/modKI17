@@ -14,7 +14,7 @@ def projected_distance(dist,ra_center,de_center,ra,de):
     cos_theta = c(de_center)*c(de)*(c(ra-ra_center))+s(de_center)*s(de)
     return dist*np.sqrt(1-cos_theta*cos_theta)
 
-def projected_angle(ra_center,de_center,ra,de):
+def projected_angle(ra_center,de_center,ra,de,dtype="rad"):
     '''
     args:
         ra_center,de_center,ra,de: radian unit
@@ -23,8 +23,9 @@ def projected_angle(ra_center,de_center,ra,de):
         dist = dist*sin(theta),
         cos_theta = c(de_center)*c(de)*(c(ra-ra_center))+s(de_center)*s(de)
     '''
-    cos_theta = c(de_center)*c(de)*(c(ra-ra_center))+s(de_center)*s(de)
-    return np.arccos(cos_theta)
+    t,t_inv = (np.deg2rad,np.rad2deg) if dtype == "deg" else (lambda x:x,lambda x:x)
+    cos_theta = c(t(de_center))*c(t(de))*(c(t(ra-ra_center)))+s(t(de_center))*s(t(de))
+    return t_inv(np.arccos(cos_theta))
 
 def hms_to_h(h,m,s):
     return h+m/60.+s/3600.
