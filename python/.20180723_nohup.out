@@ -1,0 +1,583 @@
+Traceback (most recent call last):
+  File "parameter_estimation_mem.py", line 22, in <module>
+    yn = input("OK? (y/n)")
+EOFError: EOF when reading a line
+Traceback (most recent call last):
+  File "parameter_estimation_mem.py", line 45, in <module>
+    mem = pd.read_csv(mem_fname)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 678, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 440, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 787, in __init__
+    self._make_engine(self.engine)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 1014, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 1708, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 384, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 695, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: File b'mock_mem_noMCMC1milion_v001.csv' does not exist
+Traceback (most recent call last):
+  File "parameter_estimation_mem.py", line 83, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mem.py", line 71, in __call__
+    loglikelis = np.log(fmem(self.vs,self.Rs,r_e,v_mem,a,b))
+  File "/home/gomesu/workspace/git_code/modKI17/python/model_definition.py", line 43, in dist_func_mem
+    norm = quad(
+NameError: name 'quad' is not defined
+Traceback (most recent call last):
+  File "parameter_estimation_mem.py", line 83, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mem.py", line 71, in __call__
+    loglikelis = np.log(fmem(self.vs,self.Rs,r_e,v_mem,a,b))
+  File "/home/gomesu/workspace/git_code/modKI17/python/model_definition.py", line 59, in dist_func_mem
+    ret[isin_RoI] = (prob_v_R(v,R)*prob_R(R)/norm)[isin_RoI] 
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/core/ops.py", line 1066, in wrapper
+    result = safe_na_op(lvalues, rvalues)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/core/ops.py", line 1030, in safe_na_op
+    return na_op(lvalues, rvalues)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/core/ops.py", line 1009, in na_op
+    result = expressions.evaluate(op, str_rep, x, y, **eval_kwargs)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/core/computation/expressions.py", line 205, in evaluate
+    return _evaluate(op, op_str, a, b, **eval_kwargs)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/core/computation/expressions.py", line 120, in _evaluate_numexpr
+    result = _evaluate_standard(op, op_str, a, b)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/core/computation/expressions.py", line 65, in _evaluate_standard
+    return op(a, b)
+ValueError: operands could not be broadcast together with shapes (499712,) (2,) 
+parameter_estimation_mem.py:71: RuntimeWarning: divide by zero encountered in log
+  loglikelis = np.log(fmem(self.vs,self.Rs,r_e,v_mem,a,b))
+/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py:28: RuntimeWarning: invalid value encountered in double_scalars
+  acceptance_rate = np.exp(logpdf_value_candidate-_logpdf_value)
+Traceback (most recent call last):
+  File "parameter_estimation_mem.py", line 87, in <module>
+    gen.generate_tuned(mcsteps)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 165, in generate_tuned
+    [ single_run(num_iter,isupdate_MCparameter=(i<repeat),i=i) for num_iter,i in zip(_num_iter_list,range(repeat)) ]
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 165, in <listcomp>
+    [ single_run(num_iter,isupdate_MCparameter=(i<repeat),i=i) for num_iter,i in zip(_num_iter_list,range(repeat)) ]
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 145, in single_run
+    self.generate(num_iter,with_message=True)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 107, in generate
+    results = [res for res in gen] 
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 107, in <listcomp>
+    results = [res for res in gen] 
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 35, in metropolis_generator
+    raise TypeError(mes)
+TypeError: NaN in acceptance rate calculation at 0th calculation 
+-inf -> -inf
+args_logpdf:
+v_mem    50
+a        10
+b        10
+Name: 0, dtype: int64
+args_logpdf_candidate:
+v_mem    49.886701
+a         9.979170
+b         9.895460
+dtype: float64
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'
+Traceback (most recent call last):
+  File "parameter_estimation_mod.py", line 99, in <module>
+    push_time=5)
+  File "/home/gomesu/workspace/git_code/modKI17/python/MCgenerator.py", line 70, in __init__
+    self.logpdf_value_init = self.logpdf_func(**self.args_logpdf_init)
+  File "parameter_estimation_mod.py", line 84, in __call__
+    G_mem_normed = (gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=scale_mem)-gauss.cdf(model.RoI_v_lo,loc=v_mem,scale=scale_mem))/(gauss.cdf(model.RoI_v_hi,loc=v_mem,scale=a+b)-truncgauss.cdf(model.RoI_v_lo,loc=v_mem,scale=a+b))
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/scipy/stats/_distn_infrastructure.py", line 1731, in cdf
+    args, loc, scale = self._parse_args(*args, **kwds)
+TypeError: _parse_args() missing 2 required positional arguments: 'a' and 'b'

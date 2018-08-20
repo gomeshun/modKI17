@@ -2,7 +2,7 @@ import numpy as np
 from numpy import cos as c 
 from numpy import sin as s
 
-def projected_distance(dist,ra_center,de_center,ra,de):
+def projected_distance(dist,ra_center,de_center,ra,de,dtype="rad"):
     '''
     args:
         ra_center,de_center,ra,de: radian unit
@@ -11,8 +11,21 @@ def projected_distance(dist,ra_center,de_center,ra,de):
         dist = dist*sin(theta),
         cos_theta = c(de_center)*c(de)*(c(ra-ra_center))+s(de_center)*s(de)
     '''
-    cos_theta = c(de_center)*c(de)*(c(ra-ra_center))+s(de_center)*s(de)
+    t = np.deg2rad if dtype == "deg" else lambda x:x
+    cos_theta = c(t(de_center))*c(t(de))*(c(t(ra-ra_center)))+s(t(de_center))*s(t(de))
     return dist*np.sqrt(1-cos_theta*cos_theta)
+
+def projected_distance_simple(dist,ra_center,de_center,ra,de,dtype="rad"):
+    '''
+    args:
+        ra_center,de_center,ra,de: radian unit
+    note:
+        calculate the projected distance from the center position:
+        dist = dist*sin(theta),
+        cos_theta = c(de_center)*c(de)*(c(ra-ra_center))+s(de_center)*s(de)
+    '''
+    t = np.deg2rad if dtype == "deg" else lambda x:x
+    return dist*np.sqrt( (c(t(de_center))*t(ra-ra_center))**2 + (t(de-de_center))**2 )
 
 def projected_angle(ra_center,de_center,ra,de,dtype="rad"):
     '''

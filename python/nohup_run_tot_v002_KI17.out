@@ -1,0 +1,136 @@
+calc start for 0th mock.
+calc start for 1th mock.
+calc start for 2th mock.
+calc start for 3th mock.
+calc start for 6th mock.
+calc start for 7th mock.
+calc start for 8th mock.
+calc start for 9th mock.
+calc start for 12th mock.
+calc start for 13th mock.
+calc start for 14th mock.
+calc start for 15th mock.
+calc start for 18th mock.
+calc start for 19th mock.
+calc start for 20th mock.
+calc start for 21th mock.
+calc start for 24th mock.
+calc start for 25th mock.
+calc start for 26th mock.
+calc start for 27th mock.
+Traceback (most recent call last):
+  File "parameter_estimation.py", line 39, in <module>
+    mem = pd.read_csv(mem_fname)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 678, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 440, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 787, in __init__
+    self._make_engine(self.engine)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 1014, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 1708, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 384, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 695, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: File b'mock_tot_noMCMC_v002_25.csv' does not exist
+Traceback (most recent call last):
+  File "parameter_estimation.py", line 39, in <module>
+    mem = pd.read_csv(mem_fname)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 678, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 440, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 787, in __init__
+    self._make_engine(self.engine)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 1014, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 1708, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 384, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 695, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: File b'mock_tot_noMCMC_v002_27.csv' does not exist
+Traceback (most recent call last):
+  File "parameter_estimation.py", line 39, in <module>
+    mem = pd.read_csv(mem_fname)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 678, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 440, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 787, in __init__
+    self._make_engine(self.engine)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 1014, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 1708, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 384, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 695, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: File b'mock_tot_noMCMC_v002_26.csv' does not exist
+calc start for 30th mock.
+calc start for 31th mock.
+calc start for 32th mock.
+calc start for 33th mock.
+Traceback (most recent call last):
+  File "parameter_estimation.py", line 39, in <module>
+    mem = pd.read_csv(mem_fname)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 678, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 440, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 787, in __init__
+    self._make_engine(self.engine)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 1014, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 1708, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 384, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 695, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: File b'mock_tot_noMCMC_v002_30.csv' does not exist
+Traceback (most recent call last):
+  File "parameter_estimation.py", line 39, in <module>
+    mem = pd.read_csv(mem_fname)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 678, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 440, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 787, in __init__
+    self._make_engine(self.engine)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 1014, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 1708, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 384, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 695, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: File b'mock_tot_noMCMC_v002_33.csv' does not exist
+Traceback (most recent call last):
+  File "parameter_estimation.py", line 39, in <module>
+    mem = pd.read_csv(mem_fname)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 678, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 440, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 787, in __init__
+    self._make_engine(self.engine)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 1014, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 1708, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 384, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 695, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: File b'mock_tot_noMCMC_v002_32.csv' does not exist
+Traceback (most recent call last):
+  File "parameter_estimation.py", line 39, in <module>
+    mem = pd.read_csv(mem_fname)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 678, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 440, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 787, in __init__
+    self._make_engine(self.engine)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 1014, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/gomesu/.pyenv/versions/anaconda3-5.2.0/lib/python3.6/site-packages/pandas/io/parsers.py", line 1708, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 384, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 695, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: File b'mock_tot_noMCMC_v002_31.csv' does not exist

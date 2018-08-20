@@ -19,12 +19,22 @@ POS_PLOT_TITLE = "SDSS observation of Draco: posision"
 EXPORT_FILENAME = "Draco_SDSS_cut_xy"
 EXPORT_FILENAME2 = "Draco_SDSS_cut_r"
 
-SLIDER_VAL_INIT = 2.0
+SLIDER_VAL_INIT = 1.0
+SLIDER_VAL_MAX = 1.5
+
+AX_POS_ASPECT = 0.5
+AX_POS_XRANGE = 2.1
+AX_POS_YRANGE = AX_POS_XRANGE*AX_POS_ASPECT
+
+AX_NUM_RDEGRANGE = SLIDER_VAL_INIT
+AX_NUM_BINNUM = 50
 
 EXPORT_FILENAME += str(SLIDER_VAL_INIT)+".csv"
 EXPORT_FILENAME2 += str(SLIDER_VAL_INIT)+".csv"
 
-CMD_CUT = np.array([[1.57,15.18],[0.90,17.51],[0.75,18.71],[0.37,19.30],[-0.03,19.11],[-0.42,20.00],[-0.42,20.19],[-0.42,20.99],[0.00,20.47],[0.36,20.62],[0.58,20.25],[0.90,20.28],[1.04,18.93],[1.89,15.82]])
+CMD_CUT_FNAME = "Draco_CMDcut.csv"
+CMD_CUT = np.loadtxt(CMD_CUT_FNAME,delimiter=",")
+#CMD_CUT = np.array([[1.57,15.18],[0.90,17.51],[0.75,18.71],[0.37,19.30],[-0.03,19.11],[-0.42,20.00],[-0.42,20.19],[-0.42,20.99],[0.00,20.47],[0.36,20.62],[0.58,20.25],[0.90,20.28],[1.04,18.93],[1.89,15.82]])
 CMD_CUT_C = np.append(CMD_CUT,np.array([CMD_CUT[0]]),axis=0) #2nd argument must have same dimensions to 1st one
 #print(CMD_CUT)
 #print(CMD_CUT_C)
@@ -36,10 +46,10 @@ draco_prop = dSph_prop.loc["Draco"]
 def set_axpos_coordinates():
     ax_pos.set_xlabel(r'$\xi$[deg]')
     ax_pos.set_ylabel(r'$\eta$[deg]')
-    ax_pos.set_xlim(-2.1,2.1)
-    ax_pos.set_ylim(-2.1,2.1)
+    ax_pos.set_xlim(-AX_POS_XRANGE,AX_POS_XRANGE)
+    ax_pos.set_ylim(-AX_POS_YRANGE,AX_POS_YRANGE)
     ax_pos.set_title(POS_PLOT_TITLE)
-    ax_pos.set_aspect(1)
+    ax_pos.set_aspect(1/AX_POS_ASPECT)
 
 def set_axcmd_coordinates():
     ax_cmd.set_title(CMD_PLOT_TITLE+IMPORT_SDSS_FILENAME)
@@ -124,27 +134,32 @@ cmd_pathcol = ax_cmd.scatter(gmi,i,c='gray',s=0.1)
 set_axcmd_refference()
 
 binnum = 100
-edges = np.arange(0.00,2.00+1e-8,2.00/binnum)
-edge_centers = (edges[1:binnum+1]+edges[0:binnum])/2
+edges = np.arange(0.00,AX_NUM_RDEGRANGE+1e-8,AX_NUM_RDEGRANGE/AX_NUM_BINNUM)
+edge_centers = (edges[1:]+edges[:-1])/2
 #print(edge_centers)
 
 #n,bins,patches = ax_num.hist(my.dist2d(np.array([x,y]),np.array([0,0])),bins=edges,histtype='step',normed=False)
 #DEBUG print("projected_deg:\n",(projected_angle(ra=ra,de=dec,ra_center=draco_prop.RAdeg,de_center=draco_prop.DEdeg,dtype="deg")))
 #DEBUG quit()
 n,bins,patches = ax_num.hist(projected_angle(ra=ra,de=dec,ra_center=draco_prop.RAdeg,de_center=draco_prop.DEdeg,dtype="deg"),bins=edges,histtype='step',normed=False)
-ax_ndensity = fig.add_subplot(2,2,4)
+ax_ndensity = fig.add_subplot(2,2,4) # plot the 2d density (\Sigma(R))
 #print(n)
 #print(bins)
 #ax_ndensity.plot(edge_centers,n/2./np.pi/edge_centers/np.sum(n))
 
-ax_ndensity.errorbar(edge_centers,n/2./np.pi/edge_centers/np.sum(n),yerr=np.sqrt(n)/2./np.pi/edge_centers/np.sum(n),fmt='.')
+ax_ndensity.errorbar(
+    edge_centers,
+    n/2./np.pi/edge_centers/np.sum(n), # density: (number of stars in ith bin)/(2*pi*R) where R is the center of ith bin
+    yerr=np.sqrt(n)/2./np.pi/edge_centers/np.sum(n),
+    fmt='.'
+)
 #ax_ndensity.set_xscale('log')
 ax_ndensity.set_yscale('log')
 ax_ndensity.grid(which='both')
 
 ax_slider = fig.add_axes([0.1,0.01,0.8,0.03]) #left, bottom, width, height
 ax_button = fig.add_axes([0.92,0.1,0.06,0.03])
-slider = Slider(ax_slider,'cut radius [deg]',0,2.1,valinit=SLIDER_VAL_INIT)
+slider = Slider(ax_slider,'cut radius [deg]',0,SLIDER_VAL_MAX,valinit=SLIDER_VAL_INIT)
 button = Button(ax_button,'export')
 
 def slider_update(slider_val):
@@ -172,7 +187,7 @@ def slider_update(slider_val):
     #set_axcmd_refference()
 
     ax_num.clear()
-    edges = np.arange(0.00,2.00+1e-8,2.00/50)
+    edges = np.arange(0.00,AX_NUM_RDEGRANGE+1e-8,AX_NUM_RDEGRANGE/AX_NUM_BINNUM)
     #ax_num.hist(my.dist2d(np.array([x_reshaped,y_reshaped]),np.array([0,0])),bins=edges,histtype='step',normed=False)
     ax_num.hist(
         projected_angle(draco_prop.RAdeg,draco_prop.DEdeg,x_reshaped+draco_prop.RAdeg,y_reshaped+draco_prop.DEdeg,dtype="deg"),
@@ -209,7 +224,7 @@ def button_clicked(event):
     np.savetxt(
         EXPORT_FILENAME2,
         projected_angle(
-            draco_prop.RAdeg,draco_prop.DEdeg,x_reshaped+draco_prop.draco_prop.RAdeg,y_reshaped+draco_prop.DEdeg,dtype="deg"
+            draco_prop.RAdeg,draco_prop.DEdeg,x_reshaped+draco_prop.RAdeg,y_reshaped+draco_prop.DEdeg,dtype="deg"
         ),
         '%.6e',delimiter=",",header=myheader,comments='#'
     )
@@ -218,7 +233,7 @@ def button_clicked(event):
 
     myheader = 'r_cut[deg]. r_cut = '+str(slider.val)
     #np.savetxt(OUTOF_CIRCLE_SUF+EXPORT_FILENAME2,my.dist2d(X_outof_circle.T,np.array([0,0])),'%.6e',delimiter=",",header=myheader,comments='#')
-    np.savetxt(OUTOF_CIRCLE_SUF+EXPORT_FILENAME2,projected_angle(draco_prop.RAdeg,draco_prop.DEdeg,x_outof_circle+draco_prop.draco_prop.RAdeg,y_outof_circle+draco_prop.DEdeg,dtype="deg"),'%.6e',delimiter=",",header=myheader,comments='#')
+    np.savetxt(OUTOF_CIRCLE_SUF+EXPORT_FILENAME2,projected_angle(draco_prop.RAdeg,draco_prop.DEdeg,x_outof_circle+draco_prop.RAdeg,y_outof_circle+draco_prop.DEdeg,dtype="deg"),'%.6e',delimiter=",",header=myheader,comments='#')
     print(OUTOF_CIRCLE_SUF+EXPORT_FILENAME2," is exported")
 
 def onclick(event):
@@ -227,6 +242,7 @@ def onclick(event):
         if event.inaxes!=ax_slider and event.inaxes!=ax_button:
             print("[x,y]:[%f:%f]" % (event.xdata,event.ydata))
 
+slider_update(SLIDER_VAL_INIT) # initialize
 slider.on_changed(slider_update)
 button.on_clicked(button_clicked)
 

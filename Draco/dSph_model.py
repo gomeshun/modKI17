@@ -18,7 +18,7 @@ class model:
     '''
     params, required_prams_name is undefined; must be defined in child class
     '''
-    def __init__(self,submodels_dict=None,**params):
+    def __init__(self,submodels_dict={},**params):
         self.params = pd.Series(params)
         self.required_params_name = list(self.required_params_name)
         self.submodels = submodels_dict
@@ -26,7 +26,7 @@ class model:
             raise TypeError('submodels -> submodels_dict?')
         if set(self.params.index) != set(self.required_params_name):
             raise TypeError(self.name+' has the paramsters: '+str(self.required_params_name)+" but in put is "+str(self.params.index))
-        if self.submodels != None:
+        if self.submodels != {}:
             self.name = ': ' + ' and '.join((model.name for model in self.submodels.values()))
 
     def __repr__(self):
@@ -39,13 +39,13 @@ class model:
 
     def show_params(self,models='all'):
         ret = self.params
-        if self.submodels != None and models=='all':
+        if self.submodels != {} and models=='all':
             ret = pd.concat([model.show_params('all') for model in self.submodels.values()])
         return ret
 
     def show_required_params_name(self,models='all'):
         ret = self.required_params_name[:] # need copy because we must keep self.required_params_name
-        if self.submodels != None and models=='all':
+        if self.submodels != {} and models=='all':
             [ ret.extend(model.show_required_params_name('all')) for model in self.submodels.values() ]
         return ret
 
@@ -83,8 +83,21 @@ class plummer_model(stellar_model):
         re_pc= self.params.re_pc
         return (3/4/np.pi/re_pc**3)/np.sqrt(1+(r_pc/re_pc)**2)**5
     def cdf_R(self,R_pc):
+        '''
+        cdf_R(R) = \int_0^R \dd{R'} 2\pi R' \Sigma(R')
+        '''
         re_pc= self.params.re_pc
         return 1/(1+(re_pc/R_pc)**2)
+    def mean_density_2d(self,R_pc):
+        '''
+        return the mean density_2d in R < R_pc with the weight 2*pi*R
+        mean_density_2d = \frac{\int_\RoIR \dd{R} 2\pi R \Sigma(R)}{\int_\RoIR \dd{R} 2\pi R}
+            = \frac{cdf_R(R)}{\pi R^2}
+        '''
+        re_pc= self.params.re_pc
+        return 1/pi/(R_pc**2+re_pc**2)
+    def half_light_radius(self):
+        return self.params.re_pc*sqrt(1+sqrt(2))
 
 
 class exp2d_model(stellar_model):

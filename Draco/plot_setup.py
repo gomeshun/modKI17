@@ -80,3 +80,26 @@ def scatter_matrix(self,*,bins=32,fontsize=8):
 pd.DataFrame.plot_scatter3D = scatter3D
 pd.DataFrame.plot_scatter_matrix = scatter_matrix
 
+# seaborn
+import seaborn as sns
+#sns.set(style="ticks",palette="tab10")
+sns.set_style('whitegrid')
+sns.set_palette("tab10",10)
+import matplotlib
+
+#args_pairplot = {"size":5,"plot_kws":{"s":8,"marker":"o"},"diag_kws":{"bins":32,"histtype":"stepfilled","alpha":0.3}}
+args_pairplot = {"plot_kws":{"s":8,"marker":"o"},"diag_kws":{"bins":32,"histtype":"stepfilled","alpha":0.3}}
+
+def mypairplot(
+    mcchain,
+    scatter_kws={"s":1,"marker":"o","alpha":0.1},
+    kde_kws={"shade":True,"shade_lowest":False,"cmap":"jet"},
+    hist_kws={"bins":32,"histtype":"stepfilled","alpha":0.3},
+    **kws):
+    
+    print("Note: The following warnings occur, but no problem.\nUserWarning: The following kwargs were not used by contour: 'label', 'color' ")
+    g = sns.PairGrid(mcchain,**kws)
+    g = g.map_upper(plt.scatter,**scatter_kws)
+    g = g.map_lower(sns.kdeplot,**kde_kws)
+    g = g.map_diag(plt.hist, **hist_kws)
+    return g
