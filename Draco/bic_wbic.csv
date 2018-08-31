@@ -1,0 +1,3 @@
+bic,fname_bic,fname_wbic,n_sample_bic,n_sample_wbic,wbic
+54970.90849237159,MCMCresult/MCMC_refR-re-w-center_v002.csv,MCMCresult/MCMC_refR-re-w-center_wbic_v002.csv,600000.0,600000.0,54970.89760006078
+54971.83634374646,MCMCresult/MCMC_refR-re-w-center_sersic_v001.csv,MCMCresult/MCMC_refR-re-w-center_sersic_wbic_v001.csv,600000.0,200000.0,54972.20513837062

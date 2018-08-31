@@ -4,7 +4,7 @@ import multiprocessing as multi
 
 from numpy import array,pi,sqrt,exp,power,log,log10,cos,tan,sin
 from scipy.stats import norm
-from scipy.special import k0, betainc, beta, hyp2f1, erf
+from scipy.special import k0, betainc, beta, hyp2f1, erf, gamma, gammainc
 from scipy import integrate
 from scipy.constants import parsec, degree # parsec in meter, degree in radian
 from scipy.integrate import quad
@@ -99,7 +99,36 @@ class plummer_model(stellar_model):
     def half_light_radius(self):
         return self.params.re_pc*sqrt(1+sqrt(2))
 
-
+class sersic_model(stellar_model):
+    name = "Sersic model"
+    required_params_name = ['re_pc','n']
+    def b(self,n):
+        return 2*n - 0.324
+    def norm(self):
+        n = self.params.n
+        return pi*self.params.re_pc**2 *power(self.b(n),-2*n) * gamma(2*n+1)
+    def density_2d(self,R_pc):
+        re_pc= self.params.re_pc
+        n = self.params.n
+        return exp(-self.b(n)*power(R_pc/self.params.re_pc,1/n))/self.norm()
+    def cdf_R(self,R_pc):
+        '''
+        cdf_R(R) = \int_0^R \dd{R'} 2\pi R' \Sigma(R')
+        '''
+        re_pc= self.params.re_pc
+        n = self.params.n
+        return gammainc(2*n,self.b(n)*power(R_pc/re_pc,1/n)) - gammainc(2*n,0)
+    def mean_density_2d(self,R_pc):
+        '''
+        return the mean density_2d in R < R_pc with the weight 2*pi*R
+        mean_density_2d = \frac{\int_\RoIR \dd{R} 2\pi R \Sigma(R)}{\int_\RoIR \dd{R} 2\pi R}
+            = \frac{cdf_R(R)}{\pi R^2}
+        '''
+        return self.cdf_R(R_pc)/pi/R_pc**2
+    
+    def half_light_radius(self):
+        return self.params.re_pc
+    
 class exp2d_model(stellar_model):
     name = "exp2d model"
     required_params_name = ['re_pc',]
@@ -109,7 +138,39 @@ class exp2d_model(stellar_model):
     def density_3d(self,r_pc):
         re_pc = self.params.re_pc
         return (1./2/pi**2/re_pc**3)*k0(r_pc/re_pc)
-
+    def cdf_R(self,R_pc):
+        '''
+        cdf_R(R) = \int_0^R \dd{R'} 2\pi R' \Sigma(R')
+        '''
+        re_pc = self.params.re_pc
+        return 1. - exp(-R_pc/re_pc)*(1+R_pc/re_pc)
+    def mean_density_2d(self,R_pc):
+        re_pc = self.params.re_pc
+        return self.cdf_R(R_pc)/pi/R_pc**2
+    def half_light_radius(self):
+        return 1.67834699001666*self.params.re_pc
+    
+class exp3d_model(stellar_model):
+    name = "exp3d model"
+    required_params_name = ['re_pc',]
+    def density_2d(self,R_pc):
+        re_pc = self.params.re_pc
+        return (1./2/pi/re_pc**2)*exp(-R_pc/re_pc) 
+    def density_3d(self,r_pc):
+        re_pc = self.params.re_pc
+        return (1./2/pi**2/re_pc**3)*k0(r_pc/re_pc)
+    def cdf_R(self,R_pc):
+        '''
+        cdf_R(R) = \int_0^R \dd{R'} 2\pi R' \Sigma(R')
+        '''
+        re_pc = self.params.re_pc
+        return 1. - exp(-R_pc/re_pc)*(1+R_pc/re_pc)
+    def mean_density_2d(self,R_pc):
+        re_pc = self.params.re_pc
+        return self.cdf_R(R_pc)/pi/R_pc**2
+    def half_light_radius(self):
+        return 1.67834699001666*self.params.re_pc
+        
 class uniform2d_model(stellar_model):
     name = "uniform model"
     required_params_name = ['Rmax_pc',]
