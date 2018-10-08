@@ -10,6 +10,8 @@ from scipy.constants import parsec, degree # parsec in meter, degree in radian
 from scipy.integrate import quad
 from scipy.interpolate import interp1d
 
+from multiprocessing import Pool
+
 GMsun_m3s2 = 1.32712440018e20
 R_trunc_pc = 1866.
 
@@ -18,16 +20,25 @@ class model:
     '''
     params, required_prams_name is undefined; must be defined in child class
     '''
-    def __init__(self,submodels_dict={},**params):
+    def __init__(self,show_init=False,submodels_dict={},**params):
         self.params = pd.Series(params)
         self.required_params_name = list(self.required_params_name)
         self.submodels = submodels_dict
+        self.required_models = {}
         if 'submodels' in self.params.index:
             raise TypeError('submodels -> submodels_dict?')
         if set(self.params.index) != set(self.required_params_name):
             raise TypeError(self.name+' has the paramsters: '+str(self.required_params_name)+" but in put is "+str(self.params.index))
+        for required_model in self.required_models:
+            isinstance_ =  [isinstance(model,required_model) for model in self.submodels.values]
+            if not any(isinstance_):
+                raise TypeError("no "+str(required_model))
+            
         if self.submodels != {}:
             self.name = ': ' + ' and '.join((model.name for model in self.submodels.values()))
+        if show_init:
+            print("initialized:")
+            print(self.show_params("all"))
 
     def __repr__(self):
         ret = self.name + ":\n" + self.show_params().__repr__()
@@ -79,6 +90,9 @@ class plummer_model(stellar_model):
     def density_2d(self,R_pc):
         re_pc= self.params.re_pc
         return 1/(1+(R_pc/re_pc)**2)**2 /np.pi/re_pc**2
+    def density_2d_normalized_re(self,R_pc):
+        re_pc= self.params.re_pc
+        return 4/(1+(R_pc/re_pc)**2)**2
     def density_3d(self,r_pc):
         re_pc= self.params.re_pc
         return (3/4/np.pi/re_pc**3)/np.sqrt(1+(r_pc/re_pc)**2)**5
@@ -200,8 +214,8 @@ class NFW_model(DM_model):
         is_in_Rtrunc = r_pc<self.params.R_trunc_pc
         is_outof_Rtrunc = np.logical_not(is_in_Rtrunc)
         
-        x = power(r_pc*is_in_Rtrunc/rs_pc,a)
-        x_truncd = power(R_trunc_pc/rs_pc,a)
+        x = power(r_pc/rs_pc,a)*is_in_Rtrunc
+        x_truncd = power(self.params.R_trunc_pc/rs_pc,a)
         argbeta0 = (3-g)/a
         argbeta1 = (b-3)/a
         
@@ -211,7 +225,9 @@ class NFW_model(DM_model):
         
 class dSph_model(model):
     name = 'dSph_model'
-    required_params_name = ['anib','ra_center_deg','de_center_deg','dist_center_pc']
+    required_params_name = ['anib']
+    required_models = [stellar_model,DM_model]
+    ncpu = multi.cpu_count()
 #    def __init__(self,stellar_model,DM_model,**params_dSph_model):
 #        """
 #        params_dSph_model: pandas.Series, index = (params_stellar_model,params_DM_model,center_of_dSph)
@@ -220,6 +236,18 @@ class dSph_model(model):
 #        super().__init__(**params_dSph_model)
 #        self.submodels = (stellar_model,DM_model)
 #        self.name = ' and '.join((model.name for model in self.submodels))
+    def mykernel_over_u(self,u):
+        '''
+        My kernel over u. Using 2F1.Using this kernel over u K(u)/u, sigmalos2 is given by
+            sigmalos2(R) = 2 * \int_1^oo du \Sigma_\ast(uR)/\nu_\ast(R) * GM(uR) * K(u)/u.
+            
+        Descriptions:
+            args: u = r_integrated/R, 1<u<oo
+        '''
+        anib = self.params.anib
+        u2 = u**2
+        return 1/u * sqrt(1-1/u2)*((1.5-anib)*u2*hyp2f1(1.0,1.5-anib,1.5,1-u2)-0.5)
+
     def sigmar2(self,r_pc):
         RELERROR_INTEG = 1e-6
         anib = self.params.anib
@@ -235,20 +263,55 @@ class dSph_model(model):
         integrand_interp = interp1d(rs_interp,[integrand(r) for r in rs_interp],kind="quadratic") 
         integ, abserr = integrate.quad(integrand_interp,R_pc,np.inf)
         return 2*integ/self.submodels["stellar_model"].density_2d(R_pc)
-
-    def integrand_sigmalos2(self,t,arg_R_pc):
+    
+    def integrand_sigmalos2(self,c,arg_R_pc):
+        '''
+        integrand of sigmalos2 at R = R_pc.
+        c is a variable of integration, related to u (=r/R) as u = 1/c.
+        domain: 0 < c < 1, OR 1 < u < oo.
+        The variable c has the mean of cos(\theta), where \theta is the angle of the popsition of integration
+        on the LINE-of-sight. (integration on los)
+        '''
         params_dSph,params_stellar,params_DM = self.params,self.submodels["stellar_model"].params,self.submodels["DM_model"].params
         anib = params_dSph.anib
         #print(params_dSph,params_stellar,params_DM)
         rhos_Msunpc3,rs_pc,a,b,g = [params_DM[key] for key in ('rhos_Msunpc3','rs_pc','a','b','g')]
         re_pc = params_stellar.re_pc
-        z2 = 1./t/t
+        u2 = 1./c/c
         #####weight = sqrt(z2-1)*((1.5-anib)*power(z2,anib)*hyp2f1(0.5,anib,1.5,1-z2)-0.5)
         #weight = sqrt(z2-1)*((1.5-anib)*z2*hyp2f1(1.0,1.5-anib,1.5,1-z2)-0.5) # looks like faster
         ####weight = sqrt(z2-1)*((1.5-anib)*hyp2f1(1,anib,1.5,1-1./z2)-0.5) #NOTE: It looks simple but slow because of the calculation of 2f1
-        return sqrt(z2-1)*((1.5-anib)*z2*hyp2f1(1.0,1.5-anib,1.5,1-z2)-0.5) * self.submodels["stellar_model"].density_3d(arg_R_pc/t)*GMsun_m3s2*self.submodels["DM_model"].enclosure_mass(arg_R_pc/t)/parsec # NOTE: without z^-2 !! 1/parsec because we divide it by Sigmaast [pc^-2] so convert one of [m] -> [pc]     
+        return sqrt(u2-1)*((1.5-anib)*u2*hyp2f1(1.0,1.5-anib,1.5,1-u2)-0.5) * self.submodels["stellar_model"].density_3d(arg_R_pc/c)*GMsun_m3s2*self.submodels["DM_model"].enclosure_mass(arg_R_pc/c)/parsec # NOTE: without u^-2 !! 1/parsec because we divide it by Sigmaast [pc^-2] so convert one of [m] -> [pc]  
+    
+    def integrand_sigmalos2_using_mykernel(self,u,arg_R_pc):
+        '''
+        integrand of sigmalos2 at R = R_pc.
+        u is a variable of integration, u=r/R.
+        Domain: 1 < u < oo.
+        '''
+        stellar_model,DM_model = self.submodels["stellar_model"],self.submodels["DM_model"]
+        u2,r = u**2,arg_R_pc*u
+        # Note that parsec = parsec/m.
+        # If you convert m -> pc,      ... var[m] * [1 pc/ parsec m] = var/parsec[pc].
+        #                pc^1 -> m^pc, ... var[pc^1] * parsec(=[pc/m]) = var[m^-1]
+        # Here var[m^3 pc^-1 s^-2] /parsec[m/pc] * 1e-6[km^2/m^2] = var[km^2/s^2]
+        return 2 * self.mykernel_over_u(u) *  stellar_model.density_3d(r)/stellar_model.density_2d(arg_R_pc)*GMsun_m3s2 * DM_model.enclosure_mass(r) / parsec * 1e-6
 
-    def sigmalos2_scaler(self,R_pc): # sigmalos2[km^2 s^-2] 
+    def sigmalos2_scaler_using_mykernel(self,R_pc):
+        '''
+        sigmalos2[km^2 s^-2].
+        '''
+        u_trunc = self.submodels["DM_model"].params.R_trunc_pc/R_pc
+        u_max = 10 * u_trunc
+        u_re = self.submodels["stellar_model"].params.re_pc/R_pc
+
+        # outer region is almost 0, so divede the region for good point -> u_max
+        
+        RELERR_INTEG = 1e-6
+        integ, abserr =  integrate.quad(self.integrand_sigmalos2_using_mykernel, 1,u_max, args=(R_pc,),points=(1.001,max(u_re,1.08),2.71,u_trunc))
+        return integ
+    
+    def sigmalos2_scaler(self,R_pc,using_mykernel=False): # sigmalos2[km^2 s^-2] 
         params_dSph,params_stellar,params_DM = self.params,self.submodels["stellar_model"].params,self.submodels["DM_model"].params
         anib = params_dSph.anib
         #print(params_dSph,params_stellar,params_DM)
@@ -263,9 +326,70 @@ class dSph_model(model):
     def sigmalos2_vector(self,Rs_pc):
         sigmalos2_scaler = self.sigmalos2_scaler
         return [sigmalos2_scaler(R_pc) for R_pc in Rs_pc]
+    
+    def sigmalos2_vector_using_mykernel(self,Rs_pc):
+        sigmalos2_scaler = self.sigmalos2_scaler_using_mykernel
+        return [sigmalos2_scaler(R_pc) for R_pc in Rs_pc]
+    
+    def sigmalos2_multi_using_mykernel(self,R_pc):
+        p = Pool(self.ncpu)
+        R_pc_splited = np.array_split(R_pc,self.ncpu)
+        #args = [(Rs,anib,rhos_Msunpc3,rs_pc,a,b,g,re_pc) for Rs in R_pc_v_splited]
+        ret = p.map(self.sigmalos2_vector_using_mykernel,R_pc_splited)
+        p.close()
+        return np.concatenate(ret)
 
     def sigmalos2(self,R_pc):
         return (self.sigmalos2_scaler(R_pc) if len(R_pc)==1 else self.sigmalos2_vector(R_pc))
+    
+    def sigmalos2_using_mykernel(self,R_pc):
+        return (self.sigmalos2_scaler_uging_mykernel(R_pc) if len(R_pc)==1 else self.sigmalos2_vector_using_mykernel(R_pc))
+    
+    def sigmalos_interp1d(self,R_pc,dR=1,dRtrunc=10,step_around_Rtrunc=10,step_outer=8,step_center=4,kind="cubic"):
+        '''
+        inner part has large error, so more refine interp
+        '''
+        re = self.submodels["stellar_model"].params.re_pc
+        Rtrunc = self.submodels["DM_model"].params.R_trunc_pc
+        n = len(R_pc)
+        R_pc_sorted_ = np.sort(R_pc)
+        R_pc_around_Rtrunc = np.sort(R_pc_sorted_[np.argsort(np.abs(R_pc_sorted_-Rtrunc))[:step_around_Rtrunc]])
+        Rmin,Rmax = R_pc_sorted_[0],R_pc_sorted_[-1]
+        #R_pc_lo_ = np.linspace(Rmin*0.5,Rmin*1.5,int((n*0.2)/step))
+        #R_pc_lo_ = R_pc_sorted_[:int(n*0.05)]
+        #R_pc_hi_ = np.linspace(R_pc_lo_[-1]+0.1,Rmax*1.1,int(n/step))
+        #R_pc_ = np.hstack((R_pc_lo_,R_pc_hi_))
+        R_pc_zero = R_pc_sorted_[:step_center]
+        R_pc_hi_ = np.logspace(np.log10(R_pc_sorted_[step_center]),np.log10(Rmax)+1e-8,step_outer)
+        R_pc_ = np.sort(np.unique(np.concatenate((R_pc_zero,R_pc_around_Rtrunc,R_pc_hi_),axis=None)))
+        #R_pc_ = np.linspace(Rmin,Rmax,int(n/step))
+        sigmalos2_ = self.sigmalos2_multi_using_mykernel(R_pc_)
+        interpd_func = interp1d(R_pc_, sqrt(sigmalos2_),kind=kind)
+        return interpd_func(R_pc) # here R_pc is original, so return unsorted results
+    
+    def sigmalos2_interp1d(self,R_pc,step_center=10,dR=1,dRtrunc=10,step_around_Rtrunc=10,step_before_Rtrunc=8,step_outer=8,step_inner=16,kind="cubic"):
+        '''
+        inner part has large error, so more refine interp
+        '''
+        re = self.submodels["stellar_model"].params.re_pc
+        Rtrunc = self.submodels["DM_model"].params.R_trunc_pc
+        n = len(R_pc)
+        R_pc_sorted_ = np.sort(R_pc)
+        R_pc_around_Rtrunc = np.sort(R_pc_sorted_[np.argsort(np.abs(R_pc_sorted_-Rtrunc))[:step_around_Rtrunc]])
+        Rmin,Rmax = R_pc_sorted_[0],R_pc_sorted_[-1]
+        #R_pc_lo_ = np.linspace(Rmin*0.5,Rmin*1.5,int((n*0.2)/step))
+        #R_pc_lo_ = R_pc_sorted_[:int(n*0.05)]
+        #R_pc_hi_ = np.linspace(R_pc_lo_[-1]+0.1,Rmax*1.1,int(n/step))
+        #R_pc_ = np.hstack((R_pc_lo_,R_pc_hi_))
+        R_pc_zero = R_pc_sorted_[:step_center]
+        R_pc_lo_ = np.linspace(R_pc_sorted_[step_center],R_pc_sorted_[R_pc_sorted_<re][-1],step_inner)
+        R_pc_hi_ = np.linspace(re,Rmax,step_outer)
+        R_pc_ = np.sort(np.unique(np.concatenate((R_pc_zero,R_pc_lo_,R_pc_around_Rtrunc,R_pc_hi_),axis=None)))
+        #R_pc_ = np.linspace(Rmin,Rmax,int(n/step))
+        sigmalos2_ = self.sigmalos2_multi_using_mykernel(R_pc_)
+        interpd_func = interp1d(R_pc_, sigmalos2_,kind=kind)
+        return interpd_func(R_pc) # here R_pc is original, so return unsorted results
+        
     
     def distribution_func(self,vs,Rs):
         pass
