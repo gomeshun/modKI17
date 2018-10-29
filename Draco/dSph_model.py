@@ -2,13 +2,15 @@ import pandas as pd
 import numpy as np
 import multiprocessing as multi
 
-from numpy import array,pi,sqrt,exp,power,log,log10,cos,tan,sin
+from dequad import dequad_hinf
+
+from numpy import array,pi,sqrt,exp,power,log,log10,cos,tan,sin, sort,argsort
 from scipy.stats import norm
 from scipy.special import k0, betainc, beta, hyp2f1, erf, gamma, gammainc
 from scipy import integrate
 from scipy.constants import parsec, degree # parsec in meter, degree in radian
 from scipy.integrate import quad
-from scipy.interpolate import interp1d
+from scipy.interpolate import interp1d,Akima1DInterpolator
 
 from multiprocessing import Pool
 
@@ -111,7 +113,10 @@ class plummer_model(stellar_model):
         re_pc= self.params.re_pc
         return 1/pi/(R_pc**2+re_pc**2)
     def half_light_radius(self):
-        return self.params.re_pc*sqrt(1+sqrt(2))
+        '''
+        Half-light-raduis means that the radius in which the half of all stars are include
+        '''
+        return self.params.re_pc
 
 class sersic_model(stellar_model):
     name = "Sersic model"
@@ -311,6 +316,43 @@ class dSph_model(model):
         integ, abserr =  integrate.quad(self.integrand_sigmalos2_using_mykernel, 1,u_max, args=(R_pc,),points=(1.001,max(u_re,1.08),2.71,u_trunc))
         return integ
     
+    def sigmalos2_dequad(self,R_pc):
+        def func(u):
+            u_ = np.array(u)[np.newaxis,:]
+            R_pc_ = np.array(R_pc)[:,np.newaxis]
+            return self.integrand_sigmalos2_using_mykernel(u_,R_pc_)
+        return dequad_hinf(func,1,axis=1,width=5e-3,pN=1000,mN=1000)
+    
+    def sigmalos_dequad(self,R_pc):
+        def func(u):
+            u_ = np.array(u)[np.newaxis,:]
+            R_pc_ = np.array(R_pc)[:,np.newaxis]
+            return self.integrand_sigmalos2_using_mykernel(u_,R_pc_)
+        return np.sqrt(dequad_hinf(func,1,axis=1,width=5e-3,pN=1000,mN=1000))
+    
+    def downsampling(self,array,downsampling_rate=0.5):
+        ordered_array = sort(array)
+        arg_ordered_array = argsort(array)
+        d = ordered_array[1:] - ordered_array[:-1]
+        arg = argsort(d)[int(downsampling_rate*len(array)):]
+        return array[arg_ordered_array[arg]]
+    
+    def downsamplings(self,array,downsampling_rate=0.5,iteration=1):
+        ret = array
+        func = self.downsampling
+        for i in range(iteration):
+            ret = func(ret,downsampling_rate)
+        return ret
+    
+    def sigmalos_dequad_interp1d_downsampled(self,R_pc,downsampling_rate=0.6,iteration=5,kind="cubic",offset=5,sep_offset=1,points=[25.,50.,100.,191.,400.,1950.,2000.,2050.]):
+        R_pc_sorted = sort(R_pc)
+        R_pc_downsampled = np.unique(np.concatenate([self.downsamplings(R_pc,iteration=iteration),R_pc_sorted[:offset:sep_offset],R_pc_sorted[-offset::sep_offset],points]))
+        sigmalos_ = self.sigmalos_dequad(R_pc_downsampled)
+        interpd_func = interp1d(R_pc_downsampled, sigmalos_,kind=kind)
+        #interpd_func = Akima1DInterpolator(R_pc_downsampled, sigmalos_)
+        return interpd_func(R_pc) # here R_pc is original, so return unsorted results
+        
+    
     def sigmalos2_scaler(self,R_pc,using_mykernel=False): # sigmalos2[km^2 s^-2] 
         params_dSph,params_stellar,params_DM = self.params,self.submodels["stellar_model"].params,self.submodels["DM_model"].params
         anib = params_dSph.anib
@@ -364,6 +406,28 @@ class dSph_model(model):
         R_pc_ = np.sort(np.unique(np.concatenate((R_pc_zero,R_pc_around_Rtrunc,R_pc_hi_),axis=None)))
         #R_pc_ = np.linspace(Rmin,Rmax,int(n/step))
         sigmalos2_ = self.sigmalos2_multi_using_mykernel(R_pc_)
+        interpd_func = interp1d(R_pc_, sqrt(sigmalos2_),kind=kind)
+        return interpd_func(R_pc) # here R_pc is original, so return unsorted results
+    
+    def sigmalos_interp1d_dequad(self,R_pc,dR=1,dRtrunc=10,step_around_Rtrunc=10,step_outer=20,step_center=4,kind="cubic"):
+        '''
+        inner part has large error, so more refine interp
+        '''
+        re = self.submodels["stellar_model"].params.re_pc
+        Rtrunc = self.submodels["DM_model"].params.R_trunc_pc
+        n = len(R_pc)
+        R_pc_sorted_ = np.sort(R_pc)
+        R_pc_around_Rtrunc = np.sort(R_pc_sorted_[np.argsort(np.abs(R_pc_sorted_-Rtrunc))[:step_around_Rtrunc]])
+        Rmin,Rmax = R_pc_sorted_[0],R_pc_sorted_[-1]
+        #R_pc_lo_ = np.linspace(Rmin*0.5,Rmin*1.5,int((n*0.2)/step))
+        #R_pc_lo_ = R_pc_sorted_[:int(n*0.05)]
+        #R_pc_hi_ = np.linspace(R_pc_lo_[-1]+0.1,Rmax*1.1,int(n/step))
+        #R_pc_ = np.hstack((R_pc_lo_,R_pc_hi_))
+        R_pc_zero = R_pc_sorted_[:step_center]
+        R_pc_hi_ = np.logspace(np.log10(R_pc_sorted_[step_center]),np.log10(Rmax)+1e-8,step_outer)
+        R_pc_ = np.sort(np.unique(np.concatenate((R_pc_zero,R_pc_around_Rtrunc,R_pc_hi_),axis=None)))
+        #R_pc_ = np.linspace(Rmin,Rmax,int(n/step))
+        sigmalos2_ = self.sigmalos2_dequad(R_pc_)
         interpd_func = interp1d(R_pc_, sqrt(sigmalos2_),kind=kind)
         return interpd_func(R_pc) # here R_pc is original, so return unsorted results
     
