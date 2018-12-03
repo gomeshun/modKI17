@@ -212,7 +212,19 @@ class NFW_model(DM_model):
 
     def density_3d(self,r_pc):
         pass
+    
     def enclosure_mass(self,r_pc):
+        #ret = (array(r_pc.shape) if len(r_pc)>1 else 0)
+        rs_pc, rhos_Msunpc3,a,b,g = self.params.rs_pc, self.params.rhos_Msunpc3, self.params.a, self.params.b,self.params.g
+        
+        x = power(r_pc/rs_pc,a)
+        
+        argbeta0 = (3-g)/a
+        argbeta1 = (b-3)/a
+        
+        return (4.*pi*rs_pc**3*rhos_Msunpc3/a)*beta(argbeta0,argbeta1)*betainc(argbeta0,argbeta1,x/(1+x)) 
+    
+    def enclosure_mass_truncated(self,r_pc):
         #ret = (array(r_pc.shape) if len(r_pc)>1 else 0)
         rs_pc, rhos_Msunpc3,a,b,g = self.params.rs_pc, self.params.rhos_Msunpc3, self.params.a, self.params.b,self.params.g
         
@@ -241,7 +253,7 @@ class dSph_model(model):
 #        super().__init__(**params_dSph_model)
 #        self.submodels = (stellar_model,DM_model)
 #        self.name = ' and '.join((model.name for model in self.submodels))
-    def mykernel_over_u(self,u):
+    def mykernel_over_u(self,u,out="linear"):
         '''
         My kernel over u. Using 2F1.Using this kernel over u K(u)/u, sigmalos2 is given by
             sigmalos2(R) = 2 * \int_1^oo du \Sigma_\ast(uR)/\nu_\ast(R) * GM(uR) * K(u)/u.
@@ -251,7 +263,10 @@ class dSph_model(model):
         '''
         anib = self.params.anib
         u2 = u**2
-        return 1/u * sqrt(1-1/u2)*((1.5-anib)*u2*hyp2f1(1.0,1.5-anib,1.5,1-u2)-0.5)
+        if out=="linear":
+            return 1/u * sqrt(1-1/u2)*((1.5-anib)*u2*hyp2f1(1.0,1.5-anib,1.5,1-u2)-0.5)
+        elif out=="log":
+            return -log(u) + log(1-1/u2)/2 + log((1.5-anib)*u2*hyp2f1(1.0,1.5-anib,1.5,1-u2)-0.5)
 
     def sigmar2(self,r_pc):
         RELERROR_INTEG = 1e-6
@@ -316,38 +331,47 @@ class dSph_model(model):
         integ, abserr =  integrate.quad(self.integrand_sigmalos2_using_mykernel, 1,u_max, args=(R_pc,),points=(1.001,max(u_re,1.08),2.71,u_trunc))
         return integ
     
-    def sigmalos2_dequad(self,R_pc):
+    def sigmalos2_dequad(self,R_pc,dtype=np.float64):
         def func(u):
             u_ = np.array(u)[np.newaxis,:]
             R_pc_ = np.array(R_pc)[:,np.newaxis]
             return self.integrand_sigmalos2_using_mykernel(u_,R_pc_)
-        return dequad_hinf(func,1,axis=1,width=5e-3,pN=1000,mN=1000)
+        return dequad_hinf(func,1,axis=1,width=5e-3,pN=1000,mN=1000,dtype=np.dtype,show_fig=show_fig)
     
-    def sigmalos_dequad(self,R_pc):
+    def sigmalos_dequad(self,R_pc,show_fig=False,dtype=np.float64):
         def func(u):
             u_ = np.array(u)[np.newaxis,:]
             R_pc_ = np.array(R_pc)[:,np.newaxis]
             return self.integrand_sigmalos2_using_mykernel(u_,R_pc_)
-        return np.sqrt(dequad_hinf(func,1,axis=1,width=5e-3,pN=1000,mN=1000))
+        return np.sqrt(dequad_hinf(func,1,axis=1,width=5e-3,pN=1000,mN=1000,dtype=dtype,show_fig=show_fig))
     
     def downsampling(self,array,downsampling_rate=0.5):
+        '''
+        downsampling too dense ones.
+        '''
         ordered_array = sort(array)
         arg_ordered_array = argsort(array)
-        d = ordered_array[1:] - ordered_array[:-1]
-        arg = argsort(d)[int(downsampling_rate*len(array)):]
-        return array[arg_ordered_array[arg]]
+        diff = ordered_array[1:] - ordered_array[:-1]
+        arg_arg_ordered_array = argsort(diff)[int(downsampling_rate*len(array)):] # ordering by diff and extract not too dense ones
+        #display(pd.DataFrame({"arg_ordered_array":arg_ordered_array,"array":array}))
+        #display(pd.DataFrame({"arg_arg_ordered_array":arg_arg_ordered_array}))
+        return array[arg_ordered_array[arg_arg_ordered_array]]
     
     def downsamplings(self,array,downsampling_rate=0.5,iteration=1):
         ret = array
         func = self.downsampling
+        #print("print array")
+        #display(ret)
         for i in range(iteration):
+            #print("print return i:{}".format(i))
             ret = func(ret,downsampling_rate)
+            #display(ret)
         return ret
     
-    def sigmalos_dequad_interp1d_downsampled(self,R_pc,downsampling_rate=0.6,iteration=5,kind="cubic",offset=5,sep_offset=1,points=[25.,50.,100.,191.,400.,1950.,2000.,2050.]):
+    def sigmalos_dequad_interp1d_downsampled(self,R_pc,downsampling_rate=0.6,iteration=5,kind="cubic",offset=5,sep_offset=1,points=[25.,50.,100.,191.,400.,1950.,2000.,2050.],show_fig=False,dtype=np.float64):
         R_pc_sorted = sort(R_pc)
         R_pc_downsampled = np.unique(np.concatenate([self.downsamplings(R_pc,iteration=iteration),R_pc_sorted[:offset:sep_offset],R_pc_sorted[-offset::sep_offset],points]))
-        sigmalos_ = self.sigmalos_dequad(R_pc_downsampled)
+        sigmalos_ = self.sigmalos_dequad(R_pc_downsampled,show_fig=show_fig,dtype=dtype)
         interpd_func = interp1d(R_pc_downsampled, sigmalos_,kind=kind)
         #interpd_func = Akima1DInterpolator(R_pc_downsampled, sigmalos_)
         return interpd_func(R_pc) # here R_pc is original, so return unsorted results

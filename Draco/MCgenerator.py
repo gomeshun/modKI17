@@ -54,7 +54,7 @@ def metropolis_generator(num_iter,logpdf_func,args_logpdf,logpdf_value,dargs_log
             t = time.time()
 
 class MCgenerator:
-    def __init__(self,logpdf_func,args_logpdf_init,dargs_logpdf={},proposal_dist="normal",print_func=print,**options):
+    def __init__(self,logpdf_func,args_logpdf_init,dargs_logpdf=None,proposal_dist="normal",print_func=print,**options):
         '''
         initialization of logpdfs and memory (DataFrame of Monte-Carlo chain)
 
@@ -81,7 +81,7 @@ class MCgenerator:
         self.dargs_logpdf = {}
         self.options = {}
         self.print_func = print_func
-        if dargs_logpdf != {}:
+        if dargs_logpdf is not None:
             self.update_MCparameter(dargs_logpdf,**options)
             print("MCparameters are initialized.")
         self.update_options(**options)
