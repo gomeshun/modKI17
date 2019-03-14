@@ -41,5 +41,5 @@ def dequad_hinf(func,a,width=5e-3,pN=1000,mN=1000,axis=None,kind="linear",dtype=
         logwsm = log(width *pi/2) - ts + pi/2*sinh(ts)
         logfs = func(xs)
         wsfs = (exp(logwsp*logfs)+exp(logwsm*logfs))/2
-        wsfs[isnan(wsfs) & isinf(wsfs)] = 0
+        wsfs[isnan(wsfs) | isinf(wsfs)] = 0
         return (wsfs).sum(axis=axis)
